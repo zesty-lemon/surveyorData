@@ -24,6 +24,7 @@
 		0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B849260164DA008ED3A5 /* surveyIndexView.swift */; };
 		0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B84E260164E6008ED3A5 /* entryInsertion.swift */; };
 		0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B853260164FF008ED3A5 /* surveyDataView.swift */; };
+		08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */; };
 		08F4DA5F2602D811006D4509 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4DA5E2602D811006D4509 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		0880B849260164DA008ED3A5 /* surveyIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyIndexView.swift; sourceTree = "<group>"; };
 		0880B84E260164E6008ED3A5 /* entryInsertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entryInsertion.swift; sourceTree = "<group>"; };
 		0880B853260164FF008ED3A5 /* surveyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyDataView.swift; sourceTree = "<group>"; };
+		08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFieldsView.swift; sourceTree = "<group>"; };
 		08F4DA5E2602D811006D4509 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				0880B841260164B9008ED3A5 /* surveyCreation.swift */,
+				08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */,
 				0880B849260164DA008ED3A5 /* surveyIndexView.swift */,
 				0880B853260164FF008ED3A5 /* surveyDataView.swift */,
 				0880B84E260164E6008ED3A5 /* entryInsertion.swift */,
@@ -331,6 +334,7 @@
 				0880B83D2601646F008ED3A5 /* Entry+CoreDataProperties.swift in Sources */,
 				0880B83B2601646F008ED3A5 /* Survey+CoreDataProperties.swift in Sources */,
 				08F4DA5F2602D811006D4509 /* Constants.swift in Sources */,
+				08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */,
 				0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */,
 				0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */,
 			);
