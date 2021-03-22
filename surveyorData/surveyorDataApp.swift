@@ -13,7 +13,7 @@ struct surveyorDataApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            surveyIndexView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
