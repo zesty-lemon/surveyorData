@@ -11,19 +11,20 @@ struct surveyDataView: View {
     
     //    @Binding var surveyTitle: String
     //    @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate: NSPredicate(format: "surveyTitle == %@", surveyTitle) )
-    @State var survey: Survey
+    @Binding var survey: Survey
     
     //<> = "generics" - wrapped in something else
     //   var surveys: FetchedResults<Survey>
     //  var entries: NSSet
     var body: some View {
-        if survey.entries().isEmpty {
-            Text(Constants.noItems)
-                .foregroundColor(.gray)
-                .font(.title)
-        }
-        NavigationView{
+        
+        //NavigationView{
             VStack {
+//                if survey.entries().isEmpty {
+//                    Text(Constants.noItems)
+//                        .foregroundColor(.gray)
+//                        .font(.title)
+//                }
                 Text("Survey Data")
                     .navigationBarTitle("All Data")
                     .navigationBarItems(
@@ -40,7 +41,7 @@ struct surveyDataView: View {
                 }
             }
         }
-    }
+   // }
 }
 
 struct surveyDataView_Previews: PreviewProvider {

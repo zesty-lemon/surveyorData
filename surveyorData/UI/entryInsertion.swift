@@ -12,21 +12,31 @@ import SwiftUI
 struct entryInsertion: View {
     var parentSurvey: Survey
     var body: some View {
-        Text("Creating Hardcoded Entry")
-        Button("Create Entry") {
-            createEntry()
+        VStack {
+            Text("Creating Hardcoded Entry")
+            Button("Create Entry") {
+                createEntry()
+            }
         }
+        
     }
     func createEntry(){
         //viewContext = where core data lives, container for it
         let viewContext = PersistenceController.shared.container.viewContext
         //make the item to be inserted
-        let newEntry = Entry(context: viewContext)
+        var newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
         newEntry.entryData = ["1","1","1"]
         newEntry.lat = 41.7658
         newEntry.long = 72.6734
         newEntry.survey = parentSurvey //set reference to it's parent survey
+        
+        do {
+            //save to database
+            try viewContext.save()
+        } catch {
+            print("ERROR: ",error)
+        }
         parentSurvey.addToEntry(newEntry)
     }
 }

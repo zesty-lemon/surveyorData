@@ -13,6 +13,7 @@ import CoreData
 
 
 struct surveyIndexView: View {
+    @State private var showingDetail = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: []) var surveys: FetchedResults<Survey>
     @State var selectedSurvey: Survey!
     var body: some View {
