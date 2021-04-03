@@ -6,38 +6,49 @@
 //
 
 import SwiftUI
-//insert an entry
-//I need to pass entry a survey
-//make a new Entry, and then set the "survey" paramater inside entry to this current survey
 struct entryInsertion: View {
-    var parentSurvey: Survey
+    //@ObservedObject var parentSurvey = Survey()
+    @Binding var parentSurvey: Survey
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack {
+            Text(parentSurvey.debugDescription)
             Text("Creating Hardcoded Entry")
-            Button("Create Entry") {
-                createEntry()
-            }
+        }
+        Button("Create Entry") {
+            createEntry()
         }
         
     }
     func createEntry(){
         //viewContext = where core data lives, container for it
-        let viewContext = PersistenceController.shared.container.viewContext
+        //this has to change
+        
+        //this has to change now, I am making nill entries.
+        //https://developer.apple.com/forums/thread/74186
+        //need to fetch? result and then add to it
+        //I am creating a blank one somehow
+        //let viewContext = PersistenceController.shared.container.viewContext
         //make the item to be inserted
-        var newEntry = Entry(context: viewContext)
+        
+        let newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
-        newEntry.entryData = ["1","1","1"]
+        newEntry.entryData = ["Kitten","Football","Meow"]
         newEntry.lat = 41.7658
         newEntry.long = 72.6734
         newEntry.survey = parentSurvey //set reference to it's parent survey
-        
+
+        //parentSurvey.addToEntry(newEntry)
         do {
             //save to database
+            
             try viewContext.save()
+            presentationMode.wrappedValue.dismiss()
         } catch {
             print("ERROR: ",error)
         }
-        parentSurvey.addToEntry(newEntry)
+
     }
 }
 

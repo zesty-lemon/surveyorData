@@ -9,8 +9,8 @@
         <relationship name="survey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Survey" inverseName="entry" inverseEntity="Survey"/>
     </entity>
     <entity name="Survey" representedClassName="Survey" syncable="YES">
-        <attribute name="containsLocation" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="containsPhoto" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsLocation" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="containsPhoto" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="entryDataTypes" optional="YES" attributeType="Transformable"/>
         <attribute name="entryHeaders" optional="YES" attributeType="Transformable"/>
         <attribute name="surveyTitle" optional="YES" attributeType="String"/>

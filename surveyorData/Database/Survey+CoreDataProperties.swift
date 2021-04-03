@@ -17,7 +17,7 @@ extension Survey {
     }
     
     @NSManaged public var surveyTitle: String
-    @NSManaged public var entry: NSSet?
+    @NSManaged public var entry: NSSet?  //equivelent to objectC datatype.  
     @NSManaged public var entryHeaders: [String]
     @NSManaged public var entryDataTypes: [String]?
     @NSManaged public var containsLocation: Bool

@@ -13,31 +13,33 @@ import CoreData
 
 
 struct surveyIndexView: View {
-    @State private var showingDetail = false
+    @Environment(\.managedObjectContext) var moc
+    @State var showingDetail = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: []) var surveys: FetchedResults<Survey>
-    @State var selectedSurvey: Survey!
+    //@State var selectedSurvey: Survey!
     var body: some View {
         //navigationView Here to pass survey to surveyDataView
-        
         NavigationView{
-            VStack {
-                Text("Index")
-                    .navigationBarTitle("All Surveys")
-                    .navigationBarItems(
-                        trailing: NavigationLink(
-                            destination: surveyCreation()
-                        ) {
-                            Image(systemName: "plus")
-                        }
-                    )
-                List(surveys, id: \.id) { survey in
-                    NavigationLink(destination:surveyDataView(survey: survey)){
-                        HStack {
-                            Text(survey.surveyTitle)
-                        }
+            List(surveys, id: \.id) { eachSurvey in
+                NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey)
+                ){
+                    HStack {
+                        Text(eachSurvey.surveyTitle)
                     }
                 }
             }
+            .listStyle(PlainListStyle())
+            .navigationBarTitle("All Surveys",displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                showingDetail = true
+            }, label: {
+                Image(systemName: "plus.circle")
+                    .imageScale(.large)
+            }))
+            .sheet(isPresented: $showingDetail) {
+                surveyCreation()
+            }
+            
         }
         
     }
