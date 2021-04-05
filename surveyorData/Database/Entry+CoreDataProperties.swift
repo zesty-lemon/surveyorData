@@ -18,10 +18,10 @@ extension Entry {
     //data stored in entry here
     @NSManaged public var entryData: [String]
     @NSManaged public var timeStamp: Date
-    @NSManaged public var image: Data?
+    @NSManaged public var image: Data
     @NSManaged public var lat: Double
     @NSManaged public var long: Double
-    @NSManaged public var survey: Survey?
+    @NSManaged public var survey: Survey
     
 
 }

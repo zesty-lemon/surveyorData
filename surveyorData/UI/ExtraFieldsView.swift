@@ -9,25 +9,18 @@ import SwiftUI
 
 struct ExtraFieldsView: View , Identifiable{
     var id = UUID()
-    @State var name:String = ""
-    @State var type:String = ""
+    let index: Int
     //pass in arrays of fields so this view can add to them
     @Binding var entryDataTypes: [String]
     @Binding var entryHeaders: [String]
-    
+
     var body: some View {
         HStack{
-            TextField("Field Name:",text:$name)
-            TextField("Field Type:",text:$type)
-            Button("Save"){
-                save()
-            }
+            TextField("Field Name:",text:$entryDataTypes[index])
+            TextField("Field Type:",text:$entryHeaders[index])
         }
     }
-    func save(){
-        entryDataTypes.append(type)
-        entryHeaders.append(name)
-    }
+
 }
 
 struct ExtraFieldsView_Previews: PreviewProvider {

@@ -1,7 +1,6 @@
 //
 //  surveyDataView.swift
 //  surveyorData
-//
 //  Created by Giles Lemmon on 3/16/21.
 //
 
@@ -11,13 +10,19 @@ struct surveyDataView: View {
     @State var parentSurvey: Survey
     @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false
-    
-    //reqrite survey data view to show entries corresponding to a survey as a navigation view of entries, where clicking on an entry sends you to a view of that entry
+    @State var entries: [Entry]
+    @State var needsRefresh: Bool = false{
+        didSet{
+            if needsRefresh {
+                refresh()
+                needsRefresh = false
+            }
+        }
+    }
     var body: some View {
         //NavigationView{
         VStack {
-            Text(parentSurvey.debugDescription)
-            //change this to pull from the parentSurvey built in method for doing this.  This should also fix view dynamically updating problem
+            //Text(parentSurvey.debugDescription)
             List(parentSurvey.entries(), id: \.id) { entry in
                 NavigationLink(destination:EntryDataView(entry: entry)
                 ){
@@ -27,7 +32,7 @@ struct surveyDataView: View {
                 }
             }
             .listStyle(PlainListStyle())
-            .navigationTitle("Survey Data")
+            .navigationTitle(parentSurvey.surveyTitle)
             .navigationBarItems(trailing: Button(action: {
                 showingDetail = true
             }, label: {
@@ -35,28 +40,13 @@ struct surveyDataView: View {
                     .imageScale(.large)
             }))
             .sheet(isPresented: $showingDetail) {
-                entryInsertion(parentSurvey: $parentSurvey)
+                entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh)
             }
-            
-        //  }
-        //                List(parentSurvey.entries(), id: \.id) { entry in
-        //                    HStack {
-        //                        Text(entry.entryData[1])
-        //                    }
-        //                }
-        //                .listStyle(PlainListStyle())
-        //                .navigationTitle("Survey Data")
-        //                .navigationBarItems(trailing: Button(action: {
-        //                    showingDetail = true
-        //                }, label: {
-        //                    Image(systemName: "plus.circle")
-        //                        .imageScale(.large)
-        //                }))
-        //                .sheet(isPresented: $showingDetail) {
-        //                    entryInsertion(parentSurvey: $parentSurvey)
-        //                }
-        //    }
+        }
     }
+    
+    func refresh(){
+        entries = parentSurvey.entries()
     }
 }
 

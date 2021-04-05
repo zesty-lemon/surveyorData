@@ -6,31 +6,49 @@
 //
 
 import SwiftUI
+import CoreData
+
 struct entryInsertion: View {
     //@ObservedObject var parentSurvey = Survey()
     @Binding var parentSurvey: Survey
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @Binding var needsRefresh: Bool
     var body: some View {
         VStack {
-            Text(parentSurvey.debugDescription)
+            //Text(parentSurvey.debugDescription)
             Text("Creating Hardcoded Entry")
         }
-        Button("Create Entry") {
-            createEntry()
+        //save and cancel buttons
+        HStack{
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Cancel")
+                    .padding(10)
+            }
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: 20)
+                    .stroke())
+            .padding(10)
+            Button(action: {
+                createEntry()
+                needsRefresh = true
+            }) {
+                Text("  Save  ")
+                    .padding(10)
+            }
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: 20)
+                    .stroke())
+            .padding(10)
+            //here I need some way of adding text to my list, and then displaying the list as I add it.  Then this is passed to
         }
         
     }
     func createEntry(){
-        //viewContext = where core data lives, container for it
-        //this has to change
-        
-        //this has to change now, I am making nill entries.
-        //https://developer.apple.com/forums/thread/74186
-        //need to fetch? result and then add to it
-        //I am creating a blank one somehow
-        //let viewContext = PersistenceController.shared.container.viewContext
-        //make the item to be inserted
         
         let newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
@@ -38,11 +56,10 @@ struct entryInsertion: View {
         newEntry.lat = 41.7658
         newEntry.long = 72.6734
         newEntry.survey = parentSurvey //set reference to it's parent survey
-
-        //parentSurvey.addToEntry(newEntry)
+        parentSurvey.addToEntry(newEntry)
+        
         do {
             //save to database
-            
             try viewContext.save()
             presentationMode.wrappedValue.dismiss()
         } catch {

@@ -10,10 +10,7 @@ import SwiftUI
 struct EntryDataView: View {
     @State var entry: Entry
     var body: some View {
-        VStack {
-            Text("Data for Entry")
-            Text(entry.debugDescription)
-        }
+        Text(entry.debugDescription)
     }
 }
 

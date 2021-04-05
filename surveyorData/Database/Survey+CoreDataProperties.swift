@@ -17,12 +17,14 @@ extension Survey {
     }
     
     @NSManaged public var surveyTitle: String
-    @NSManaged public var entry: NSSet?  //equivelent to objectC datatype.  
+    @NSManaged public var entry: NSSet?
     @NSManaged public var entryHeaders: [String]
     @NSManaged public var entryDataTypes: [String]?
     @NSManaged public var containsLocation: Bool
     @NSManaged public var containsPhoto: Bool
-
+    //hacky & weird, maybe bug?
+    @NSManaged public var type: String
+    
     //in addition to entry headers, maybe add variables like includeGPS, includeLoac etc
     //returns an ordered list of entries, sorted by time created
     public func entries() -> [Entry]{

@@ -11,5 +11,9 @@ import CoreData
 
 @objc(Survey)
 public class Survey: NSManagedObject {
-
+    public var entryArray: [Entry] {
+        get {
+            return entries()
+        }
+    }
 }

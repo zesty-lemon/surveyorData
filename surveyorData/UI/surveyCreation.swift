@@ -24,8 +24,6 @@ struct surveyCreation: View {
         VStack {
             Form {
                 Section {
-                    //why do I have to use $ signs
-                    
                     Text("Data in Survey")
                         .font(.title)
                     TextField("Survey Name:",text:$surveyTitle)
@@ -35,8 +33,9 @@ struct surveyCreation: View {
                         field
                     }
                     Button("Add Field"){
-                        //adds new extra fields view
-                        extraFields.append(ExtraFieldsView(entryDataTypes: $entryDataTypes, entryHeaders: $entryHeaders))
+                        entryDataTypes.append("")
+                        entryHeaders.append("")
+                        extraFields.append(ExtraFieldsView(index: entryHeaders.count-1,entryDataTypes: $entryDataTypes, entryHeaders: $entryHeaders))
                         print(debugPrint(extraFields))
                     }
                 }
@@ -64,23 +63,23 @@ struct surveyCreation: View {
                         cornerRadius: 20)
                         .stroke())
                 .padding(10)
-                //here I need some way of adding text to my list, and then displaying the list as I add it.  Then this is passed to
             }
         }
     }
     
     func createSurvey() -> Void{
-        //viewContext = where core data lives, container for it
-        //let viewContext = PersistenceController.shared.container.viewContext
-        //make the item to be inserted
         let NewSurvey = Survey(context: viewContext)
         NewSurvey.surveyTitle = surveyTitle
-        
-        debugPrint(entryHeaders)
+        print("headers")
+        print(entryHeaders)
+        print("dataTypes:")
+        print(entryDataTypes)
         NewSurvey.entryHeaders = entryHeaders
         NewSurvey.entryDataTypes = entryDataTypes
         NewSurvey.containsLocation = usesGPS
         NewSurvey.containsPhoto = usesPhoto
+        NewSurvey.type = "Survey"
+        
         debugPrint(NewSurvey.entryHeaders)
         do {
             //save to database

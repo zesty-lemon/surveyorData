@@ -15,13 +15,11 @@ import CoreData
 struct surveyIndexView: View {
     @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false
-    @FetchRequest(entity: Survey.entity(), sortDescriptors: []) var surveys: FetchedResults<Survey>
-    //@State var selectedSurvey: Survey!
+    @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate:NSPredicate(format:"type == %@","Survey")) var surveys: FetchedResults<Survey>
     var body: some View {
-        //navigationView Here to pass survey to surveyDataView
         NavigationView{
             List(surveys, id: \.id) { eachSurvey in
-                NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey)
+                NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
                 ){
                     HStack {
                         Text(eachSurvey.surveyTitle)
@@ -34,16 +32,14 @@ struct surveyIndexView: View {
                 showingDetail = true
             }, label: {
                 Image(systemName: "plus.circle")
-                    .imageScale(.large)
+                //.imageScale(.large)
+                    .font(.system(size: 35))
             }))
             .sheet(isPresented: $showingDetail) {
                 surveyCreation()
             }
-            
         }
-        
     }
-    
 }
 
 struct surveyIndexView_Previews: PreviewProvider {
