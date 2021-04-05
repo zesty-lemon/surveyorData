@@ -1,10 +1,8 @@
 //
 //  entryInsertion.swift
 //  surveyorData
-//
 //  Created by Giles Lemmon on 3/16/21.
 //
-
 import SwiftUI
 import CoreData
 
@@ -14,10 +12,25 @@ struct entryInsertion: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @Binding var needsRefresh: Bool
+    @State private var dataToAdd = [String]()
     var body: some View {
         VStack {
             //Text(parentSurvey.debugDescription)
-            Text("Creating Hardcoded Entry")
+            //Text("Creating Hardcoded Entry")
+//            ForEach(parentSurvey.entryHeaders){ entryField in
+//                TextField("Field \(idx)", text: dataToAdd.append())
+//            }
+            if parentSurvey.containsPhoto == false{
+                Text("No Photo")
+            }
+            //send to correct insertion view based on type stored in entryTypes
+            //.keyboardType(.numberPad)
+            //maybe have a view for each row in entryHeaders
+            Form {
+                ForEach(parentSurvey.entryHeaders, id: \.self){ entryField in
+                    Text(entryField)
+                }
+            }
         }
         //save and cancel buttons
         HStack{
@@ -67,6 +80,7 @@ struct entryInsertion: View {
         }
 
     }
+
 }
 
 struct entryInsertion_Previews: PreviewProvider {

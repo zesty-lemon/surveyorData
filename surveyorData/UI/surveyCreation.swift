@@ -93,6 +93,7 @@ struct surveyCreation: View {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+
 }
 struct surveyCreation_Previews: PreviewProvider {
     static var previews: some View {
