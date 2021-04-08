@@ -24,6 +24,7 @@
 		0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B849260164DA008ED3A5 /* surveyIndexView.swift */; };
 		0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B84E260164E6008ED3A5 /* entryInsertion.swift */; };
 		0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B853260164FF008ED3A5 /* surveyDataView.swift */; };
+		08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */; };
 		08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C28B09261122D700C6AA3B /* EntryDataView.swift */; };
 		08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */; };
 		08F4DA5F2602D811006D4509 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4DA5E2602D811006D4509 /* Constants.swift */; };
@@ -70,6 +71,7 @@
 		0880B849260164DA008ED3A5 /* surveyIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyIndexView.swift; sourceTree = "<group>"; };
 		0880B84E260164E6008ED3A5 /* entryInsertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entryInsertion.swift; sourceTree = "<group>"; };
 		0880B853260164FF008ED3A5 /* surveyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyDataView.swift; sourceTree = "<group>"; };
+		08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryParameterView.swift; sourceTree = "<group>"; };
 		08C28B09261122D700C6AA3B /* EntryDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDataView.swift; sourceTree = "<group>"; };
 		08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFieldsView.swift; sourceTree = "<group>"; };
 		08F4DA5E2602D811006D4509 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				08C28B09261122D700C6AA3B /* EntryDataView.swift */,
 				080D6FD0260286BB00B9A32D /* startScreen.swift */,
 				08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */,
+				08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */,
 				0880B80326015FD8008ED3A5 /* surveyorData.xcdatamodeld in Sources */,
 				08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */,
+				08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */,
 				0880B83A2601646F008ED3A5 /* Entry+CoreDataClass.swift in Sources */,
 				0880B842260164B9008ED3A5 /* surveyCreation.swift in Sources */,
 				0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */,

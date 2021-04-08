@@ -9,26 +9,28 @@ import CoreData
 struct entryInsertion: View {
     //@ObservedObject var parentSurvey = Survey()
     @Binding var parentSurvey: Survey
-    @Environment(\.managedObjectContext) private var viewContext
+    //@Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @Binding var needsRefresh: Bool
+    @Binding var parentEntryList: [Entry]
     @State private var dataToAdd = [String]()
+    @State private var entryHeaders: [String] = []
+    @State private var entryAdditionFields: [EntryParameterView] = []
+    
+    
     var body: some View {
         VStack {
             //Text(parentSurvey.debugDescription)
             //Text("Creating Hardcoded Entry")
-//            ForEach(parentSurvey.entryHeaders){ entryField in
-//                TextField("Field \(idx)", text: dataToAdd.append())
-//            }
             if parentSurvey.containsPhoto == false{
                 Text("No Photo")
             }
             //send to correct insertion view based on type stored in entryTypes
-            //.keyboardType(.numberPad)
+            //.keyboardType(.decimalPad)
             //maybe have a view for each row in entryHeaders
-            Form {
-                ForEach(parentSurvey.entryHeaders, id: \.self){ entryField in
-                    Text(entryField)
+            Form{
+                List(entryAdditionFields, id: \.id){ field in
+                    field
                 }
             }
         }
@@ -46,8 +48,12 @@ struct entryInsertion: View {
                     .stroke())
             .padding(10)
             Button(action: {
+                print("save point")
                 createEntry()
+                print("After save .needsRefresh = \(needsRefresh)")
                 needsRefresh = true
+                print("NeedsRefresh Should be true, it's \(needsRefresh)")
+                presentationMode.wrappedValue.dismiss()
             }) {
                 Text("  Save  ")
                     .padding(10)
@@ -57,24 +63,33 @@ struct entryInsertion: View {
                     cornerRadius: 20)
                     .stroke())
             .padding(10)
-            //here I need some way of adding text to my list, and then displaying the list as I add it.  Then this is passed to
         }
-        
+        .onAppear{
+            setupEntry()
+        }
+    }
+
+    func setupEntry(){
+        for i in 0..<parentSurvey.entryHeaders.count {
+            dataToAdd.append("")
+            entryHeaders.append(parentSurvey.entryHeaders[i])
+            entryAdditionFields.append(EntryParameterView(index: dataToAdd.count-1,entryData: $dataToAdd, entryHeaders: $entryHeaders))
+        }
     }
     func createEntry(){
-        
+        let viewContext = PersistenceController.shared.container.viewContext
         let newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
-        newEntry.entryData = ["Kitten","Football","Meow"]
+        newEntry.entryData = dataToAdd
         newEntry.lat = 41.7658
         newEntry.long = 72.6734
         newEntry.survey = parentSurvey //set reference to it's parent survey
         parentSurvey.addToEntry(newEntry)
-        
+        parentEntryList.append(newEntry)
         do {
             //save to database
             try viewContext.save()
-            presentationMode.wrappedValue.dismiss()
+            
         } catch {
             print("ERROR: ",error)
         }

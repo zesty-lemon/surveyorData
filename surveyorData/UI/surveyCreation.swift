@@ -40,6 +40,7 @@ struct surveyCreation: View {
                     }
                 }
             }
+            
             HStack{
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()

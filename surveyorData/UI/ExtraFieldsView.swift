@@ -19,8 +19,6 @@ struct ExtraFieldsView: View , Identifiable{
         HStack{
             //TextField("Field Name:",text:$entryDataTypes[index])
             TextField("Field Name:",text:$entryHeaders[index])
-            // I may change this field to "Units" instead
-            // for now, have the selection be the label itself
             Picker("\(selectedType)", selection: $selectedType) {
                 ForEach(Constants.allowableTypes, id: \.self) {
                     Text($0)
@@ -30,7 +28,6 @@ struct ExtraFieldsView: View , Identifiable{
                         self.setType(toAdd: selectedType)
              }
             .pickerStyle(MenuPickerStyle())
-            
         }
     }
     

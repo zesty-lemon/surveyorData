@@ -8,26 +8,26 @@ import SwiftUI
 //entries within survey
 struct surveyDataView: View {
     @State var parentSurvey: Survey
-    @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false
     @State var entries: [Entry]
-    @State var needsRefresh: Bool = false{
+    @State var needsRefresh: Bool = true {
         didSet{
+            print("It's set")
             if needsRefresh {
+                print("needs refresh")
                 refresh()
                 needsRefresh = false
             }
         }
     }
     var body: some View {
-        //NavigationView{
         VStack {
             //Text(parentSurvey.debugDescription)
-            List(parentSurvey.entries(), id: \.id) { entry in
+            List(entries, id: \.id) { entry in
                 NavigationLink(destination:EntryDataView(entry: entry)
                 ){
                     HStack {
-                        Text("Test")
+                        Text("Entry")
                     }
                 }
             }
@@ -40,13 +40,15 @@ struct surveyDataView: View {
                     .imageScale(.large)
             }))
             .sheet(isPresented: $showingDetail) {
-                entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh)
+                entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
             }
         }
     }
     
     func refresh(){
-        entries = parentSurvey.entries()
+        //entries = parentSurvey.entries()
+        needsRefresh = false
+        print("Refreshed")
     }
 }
 
