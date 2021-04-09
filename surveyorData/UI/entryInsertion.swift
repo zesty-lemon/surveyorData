@@ -46,40 +46,7 @@ struct entryInsertion: View {
                                         }) {
                                             Text("Save").bold()
                                         })
-            /*
-             //save and cancel buttons
-             HStack{
-             Button(action: {
-             presentationMode.wrappedValue.dismiss()
-             }) {
-             Text("Cancel")
-             .padding(10)
-             }
-             .overlay(
-             RoundedRectangle(
-             cornerRadius: 20)
-             .stroke())
-             .padding(10)
-             Button(action: {
-             print("save point")
-             createEntry()
-             print("After save .needsRefresh = \(needsRefresh)")
-             needsRefresh = true
-             print("NeedsRefresh Should be true, it's \(needsRefresh)")
-             presentationMode.wrappedValue.dismiss()
-             }) {
-             Text("  Save  ")
-             .padding(10)
-             }
-             .overlay(
-             RoundedRectangle(
-             cornerRadius: 20)
-             .stroke())
-             .padding(10)
-             }
-             .onAppear{
-             setupEntry()
-             }*/
+            
         }
         .onAppear{
             setupEntry()

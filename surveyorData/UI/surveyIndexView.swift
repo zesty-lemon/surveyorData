@@ -19,13 +19,16 @@ struct surveyIndexView: View {
     var body: some View {
         
         NavigationView{
-            List(surveys, id: \.id) { eachSurvey in
-                NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
-                ){
-                    HStack {
-                        Text(eachSurvey.surveyTitle)
+            List{
+                ForEach(surveys, id: \.id) { eachSurvey in
+                    NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
+                    ){
+                        HStack {
+                            Text(eachSurvey.surveyTitle)
+                        }
                     }
                 }
+                .onDelete(perform: deleteSurvey(at:))
             }
             .listStyle(PlainListStyle())
             .navigationBarTitle("All Surveys",displayMode: .inline)
@@ -33,13 +36,20 @@ struct surveyIndexView: View {
                 showingDetail = true
             }, label: {
                 Image(systemName: "plus.circle")
-                //.imageScale(.large)
+                    //.imageScale(.large)
                     .font(.system(size: 30))
             }))
             .sheet(isPresented: $showingDetail) {
                 surveyCreation()
             }
         }
+    }
+    func deleteSurvey(at offsets: IndexSet) {
+        for eachSurvey in offsets {
+            let toDelete = surveys[eachSurvey]
+            moc.delete(toDelete)
+        }
+        try? moc.save()
     }
 }
 
