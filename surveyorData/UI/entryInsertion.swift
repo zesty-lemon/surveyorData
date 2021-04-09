@@ -19,53 +19,72 @@ struct entryInsertion: View {
     //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
-        VStack {
-            //Text(parentSurvey.debugDescription)
-            //Text("Creating Hardcoded Entry")
-            if parentSurvey.containsPhoto == false{
-                Text("No Photo")
-            }
-            Form{
-                List(entryAdditionFields, id: \.id){ field in
-                    field
+        NavigationView{
+            VStack {
+                //Text(parentSurvey.debugDescription)
+                //Text("Creating Hardcoded Entry")
+                if parentSurvey.containsPhoto == false{
+                    Text("No Photo")
+                }
+                Form{
+                    List(entryAdditionFields, id: \.id){ field in
+                        field
+                    }
                 }
             }
-        }
-        //save and cancel buttons
-        HStack{
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Cancel")
-                    .padding(10)
-            }
-            .overlay(
-                RoundedRectangle(
-                    cornerRadius: 20)
-                    .stroke())
-            .padding(10)
-            Button(action: {
-                print("save point")
-                createEntry()
-                print("After save .needsRefresh = \(needsRefresh)")
-                needsRefresh = true
-                print("NeedsRefresh Should be true, it's \(needsRefresh)")
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("  Save  ")
-                    .padding(10)
-            }
-            .overlay(
-                RoundedRectangle(
-                    cornerRadius: 20)
-                    .stroke())
-            .padding(10)
+            .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        Text("Cancel").bold()
+                                    }, trailing:
+                                        Button(action: {
+                                            createEntry()
+                                            needsRefresh = true
+                                            presentationMode.wrappedValue.dismiss()
+                                        }) {
+                                            Text("Save").bold()
+                                        })
+            /*
+             //save and cancel buttons
+             HStack{
+             Button(action: {
+             presentationMode.wrappedValue.dismiss()
+             }) {
+             Text("Cancel")
+             .padding(10)
+             }
+             .overlay(
+             RoundedRectangle(
+             cornerRadius: 20)
+             .stroke())
+             .padding(10)
+             Button(action: {
+             print("save point")
+             createEntry()
+             print("After save .needsRefresh = \(needsRefresh)")
+             needsRefresh = true
+             print("NeedsRefresh Should be true, it's \(needsRefresh)")
+             presentationMode.wrappedValue.dismiss()
+             }) {
+             Text("  Save  ")
+             .padding(10)
+             }
+             .overlay(
+             RoundedRectangle(
+             cornerRadius: 20)
+             .stroke())
+             .padding(10)
+             }
+             .onAppear{
+             setupEntry()
+             }*/
         }
         .onAppear{
             setupEntry()
         }
     }
-
     func setupEntry(){
         for i in 0..<parentSurvey.entryHeaders.count {
             dataToAdd.append("")
@@ -90,9 +109,9 @@ struct entryInsertion: View {
         } catch {
             print("ERROR: ",error)
         }
-
+        
     }
-
+    
 }
 
 struct entryInsertion_Previews: PreviewProvider {

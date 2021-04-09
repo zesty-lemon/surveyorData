@@ -15,7 +15,7 @@
         <attribute name="entryHeaders" optional="YES" attributeType="Transformable"/>
         <attribute name="surveyTitle" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="entry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="survey" inverseEntity="Entry"/>
+        <relationship name="entry" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Entry" inverseName="survey" inverseEntity="Entry"/>
     </entity>
     <elements>
         <element name="Entry" positionX="-63" positionY="-18" width="128" height="119"/>

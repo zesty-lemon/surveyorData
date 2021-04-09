@@ -17,6 +17,7 @@ struct surveyIndexView: View {
     @State var showingDetail = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate:NSPredicate(format:"type == %@","Survey")) var surveys: FetchedResults<Survey>
     var body: some View {
+        
         NavigationView{
             List(surveys, id: \.id) { eachSurvey in
                 NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
@@ -33,7 +34,7 @@ struct surveyIndexView: View {
             }, label: {
                 Image(systemName: "plus.circle")
                 //.imageScale(.large)
-                    .font(.system(size: 35))
+                    .font(.system(size: 30))
             }))
             .sheet(isPresented: $showingDetail) {
                 surveyCreation()

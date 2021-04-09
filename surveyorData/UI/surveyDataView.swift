@@ -26,7 +26,9 @@ struct surveyDataView: View {
         VStack {
             //Text(parentSurvey.debugDescription)
             if entries.count == 0 {
-                Text("No Samples").font(.largeTitle)
+                VStack{
+                    Text("No Samples").font(.largeTitle)
+                    Text("Add a sample using the Plus button")
                     .navigationTitle(parentSurvey.surveyTitle)
                     .navigationBarItems(trailing: Button(action: {
                         showingDetail = true
@@ -37,6 +39,7 @@ struct surveyDataView: View {
                     .sheet(isPresented: $showingDetail) {
                         entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
                     }
+                }
             }
             else {
                 List{
