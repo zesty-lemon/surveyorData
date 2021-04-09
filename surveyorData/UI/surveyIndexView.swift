@@ -19,28 +19,47 @@ struct surveyIndexView: View {
     var body: some View {
         
         NavigationView{
-            List{
-                ForEach(surveys, id: \.id) { eachSurvey in
-                    NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
-                    ){
-                        HStack {
-                            Text(eachSurvey.surveyTitle)
-                        }
+            if surveys.count == 0 {
+                VStack{
+                Text("No Surveys").font(.largeTitle)
+                Text("Make a new survey with the plus button")
+                    .navigationBarTitle("All Surveys",displayMode: .inline)
+                    .navigationBarItems(trailing: Button(action: {
+                        showingDetail = true
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            //.imageScale(.large)
+                            .font(.system(size: 30))
+                    }))
+                    .sheet(isPresented: $showingDetail) {
+                        surveyCreation()
                     }
                 }
-                .onDelete(perform: deleteSurvey(at:))
             }
-            .listStyle(PlainListStyle())
-            .navigationBarTitle("All Surveys",displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                showingDetail = true
-            }, label: {
-                Image(systemName: "plus.circle")
-                    //.imageScale(.large)
-                    .font(.system(size: 30))
-            }))
-            .sheet(isPresented: $showingDetail) {
-                surveyCreation()
+            else{
+                List{
+                    ForEach(surveys, id: \.id) { eachSurvey in
+                        NavigationLink(destination:surveyDataView(parentSurvey: eachSurvey, entries: eachSurvey.entries())
+                        ){
+                            HStack {
+                                Text(eachSurvey.surveyTitle)
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteSurvey(at:))
+                }
+                .listStyle(PlainListStyle())
+                .navigationBarTitle("All Surveys",displayMode: .inline)
+                .navigationBarItems(trailing: Button(action: {
+                    showingDetail = true
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        //.imageScale(.large)
+                        .font(.system(size: 30))
+                }))
+                .sheet(isPresented: $showingDetail) {
+                    surveyCreation()
+                }
             }
         }
     }

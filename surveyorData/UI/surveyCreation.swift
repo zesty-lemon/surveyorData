@@ -24,13 +24,15 @@ struct surveyCreation: View {
             VStack {
                 Form {
                     Section {
-                        Text("Data in Survey")
+                        Text("Data in this Survey")
                             .font(.title)
                         TextField("Survey Name:",text:$surveyTitle)
                         Toggle("Include Photo", isOn: $usesPhoto)
                         Toggle("Include GPS Location", isOn: $usesGPS)
-                        List(extraFields, id: \.id) { field in
-                            field
+                        List{
+                            ForEach(extraFields, id: \.id) { field in
+                                field
+                            }
                         }
                         //add an "on delete" method here
                         Button("Add Field"){
@@ -43,6 +45,7 @@ struct surveyCreation: View {
                 }
             }
             .navigationBarTitle(Text("Create New Survey"), displayMode: .inline)
+            //these have been deprecated but still work? replacements are very fussy
             .navigationBarItems(leading:
                                     Button(action: {
                                         presentationMode.wrappedValue.dismiss()
