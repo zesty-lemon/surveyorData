@@ -19,7 +19,7 @@ extension Survey {
     @NSManaged public var surveyTitle: String
     @NSManaged public var entry: NSSet?
     @NSManaged public var entryHeaders: [String]
-    @NSManaged public var entryDataTypes: [String]?
+    @NSManaged public var entryDataTypes: [String] //can it be instantiated but have a value of null if it is non-optional?
     @NSManaged public var containsLocation: Bool
     @NSManaged public var containsPhoto: Bool
     //hacky & weird, maybe bug?

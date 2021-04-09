@@ -7,6 +7,7 @@
 import SwiftUI
 //entries within survey
 struct surveyDataView: View {
+    @Environment(\.managedObjectContext) var moc //maybe replace with viewContext?
     @State var parentSurvey: Survey
     @State var showingDetail = false
     @State var entries: [Entry]
@@ -21,34 +22,60 @@ struct surveyDataView: View {
         }
     }
     var body: some View {
+        
         VStack {
             //Text(parentSurvey.debugDescription)
-            List(entries, id: \.id) { entry in
-                NavigationLink(destination:EntryDataView(entry: entry)
-                ){
-                    HStack {
-                        Text("Entry")
+            if entries.count == 0 {
+                Text("No Samples").font(.largeTitle)
+                    .navigationTitle(parentSurvey.surveyTitle)
+                    .navigationBarItems(trailing: Button(action: {
+                        showingDetail = true
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            .imageScale(.large)
+                    }))
+                    .sheet(isPresented: $showingDetail) {
+                        entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
                     }
-                }
             }
-            .listStyle(PlainListStyle())
-            .navigationTitle(parentSurvey.surveyTitle)
-            .navigationBarItems(trailing: Button(action: {
-                showingDetail = true
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .imageScale(.large)
-            }))
-            .sheet(isPresented: $showingDetail) {
-                entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+            else {
+                List{
+                    ForEach(entries, id: \.id) { entry in
+                        NavigationLink(destination:EntryDataView(entry: entry)
+                        ){
+                            HStack {
+                                Text("Sample: \(entry.timeStamp)")
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteEntry(at:))
+                }
+                .listStyle(PlainListStyle())
+                .navigationTitle(parentSurvey.surveyTitle)
+                .navigationBarItems(trailing: Button(action: {
+                    showingDetail = true
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        .imageScale(.large)
+                }))
+                .sheet(isPresented: $showingDetail) {
+                    entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                }
             }
         }
     }
-    
     func refresh(){
         //entries = parentSurvey.entries()
         needsRefresh = false
         print("Refreshed")
+    }
+    func deleteEntry(at offsets: IndexSet) {
+        for index in offsets {
+            let user = entries[index]
+            moc.delete(user)
+            entries.remove(at: index)
+        }
+        try? moc.save()
     }
 }
 

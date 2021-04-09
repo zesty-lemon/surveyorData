@@ -10,7 +10,10 @@ import SwiftUI
 struct EntryDataView: View {
     @State var entry: Entry
     var body: some View {
-        Text(entry.debugDescription)
+        VStack{
+            Text(entry.debugDescription)
+                .navigationTitle("Data in Sample:")
+        }
     }
 }
 

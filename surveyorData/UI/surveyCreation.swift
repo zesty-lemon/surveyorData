@@ -20,51 +20,41 @@ struct surveyCreation: View {
     @State private var entryHeaders = [String]()
     
     var body: some View {
-        
-        VStack {
-            Form {
-                Section {
-                    Text("Data in Survey")
-                        .font(.title)
-                    TextField("Survey Name:",text:$surveyTitle)
-                    Toggle("Include Photo", isOn: $usesPhoto)
-                    Toggle("Include GPS Location", isOn: $usesGPS)
-                    List(extraFields, id: \.id) { field in
-                        field
-                    }
-                    Button("Add Field"){
-                        entryDataTypes.append("")
-                        entryHeaders.append("")
-                        extraFields.append(ExtraFieldsView(index: entryHeaders.count-1,entryDataTypes: $entryDataTypes, entryHeaders: $entryHeaders))
-                        print(debugPrint(extraFields))
+        NavigationView {
+            VStack {
+                Form {
+                    Section {
+                        Text("Data in Survey")
+                            .font(.title)
+                        TextField("Survey Name:",text:$surveyTitle)
+                        Toggle("Include Photo", isOn: $usesPhoto)
+                        Toggle("Include GPS Location", isOn: $usesGPS)
+                        List(extraFields, id: \.id) { field in
+                            field
+                        }
+                        //add an "on delete" method here
+                        Button("Add Field"){
+                            entryDataTypes.append("")
+                            entryHeaders.append("")
+                            extraFields.append(ExtraFieldsView(index: entryHeaders.count-1,entryDataTypes: $entryDataTypes, entryHeaders: $entryHeaders))
+                            print(debugPrint(extraFields))
+                        }
                     }
                 }
             }
-            
-            HStack{
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Cancel")
-                        .padding(10)
-                }
-                .overlay(
-                    RoundedRectangle(
-                        cornerRadius: 20)
-                        .stroke())
-                .padding(10)
-                Button(action: {
-                    createSurvey()
-                }) {
-                    Text("  Save  ")
-                        .padding(10)
-                }
-                .overlay(
-                    RoundedRectangle(
-                        cornerRadius: 20)
-                        .stroke())
-                .padding(10)
-            }
+            .navigationBarTitle(Text("Create New Survey"), displayMode: .inline)
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        Text("Cancel").bold()
+                                    }, trailing:
+                                        Button(action: {
+                                            createSurvey()
+                                            presentationMode.wrappedValue.dismiss()
+                                        }) {
+                                            Text("Save").bold()
+                                        })
         }
     }
     
@@ -94,7 +84,7 @@ struct surveyCreation: View {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
-
+    
 }
 struct surveyCreation_Previews: PreviewProvider {
     static var previews: some View {

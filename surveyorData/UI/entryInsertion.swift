@@ -16,7 +16,7 @@ struct entryInsertion: View {
     @State private var dataToAdd = [String]()
     @State private var entryHeaders: [String] = []
     @State private var entryAdditionFields: [EntryParameterView] = []
-    
+    //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
         VStack {
@@ -25,9 +25,6 @@ struct entryInsertion: View {
             if parentSurvey.containsPhoto == false{
                 Text("No Photo")
             }
-            //send to correct insertion view based on type stored in entryTypes
-            //.keyboardType(.decimalPad)
-            //maybe have a view for each row in entryHeaders
             Form{
                 List(entryAdditionFields, id: \.id){ field in
                     field
@@ -73,7 +70,7 @@ struct entryInsertion: View {
         for i in 0..<parentSurvey.entryHeaders.count {
             dataToAdd.append("")
             entryHeaders.append(parentSurvey.entryHeaders[i])
-            entryAdditionFields.append(EntryParameterView(index: dataToAdd.count-1,entryData: $dataToAdd, entryHeaders: $entryHeaders))
+            entryAdditionFields.append(EntryParameterView(index: dataToAdd.count-1,entryData: $dataToAdd, entryHeaders: $entryHeaders, entryDataTypes: $parentSurvey.entryDataTypes))
         }
     }
     func createEntry(){

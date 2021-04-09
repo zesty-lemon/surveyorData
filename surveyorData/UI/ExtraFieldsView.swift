@@ -13,7 +13,7 @@ struct ExtraFieldsView: View , Identifiable{
     //pass in arrays of fields so this view can add to them
     @Binding var entryDataTypes: [String]
     @Binding var entryHeaders: [String]
-    @State private var selectedType = "Type"
+    @State private var selectedType = "Pick Type:"
     
     var body: some View {
         HStack{

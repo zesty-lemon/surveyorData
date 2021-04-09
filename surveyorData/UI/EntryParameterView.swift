@@ -12,10 +12,17 @@ struct EntryParameterView: View, Identifiable {
     let index: Int
     @Binding var entryData: [String]
     @Binding var entryHeaders: [String]
-
+    @Binding var entryDataTypes: [String]
     
     var body: some View {
-        TextField(entryHeaders[index], text: $entryData[index])
+        
+        if entryDataTypes[index] == "Number"{
+            TextField(entryHeaders[index], text: $entryData[index])
+                .keyboardType(.decimalPad)
+        }
+        else {
+            TextField(entryHeaders[index], text: $entryData[index])
+        }
     }
 }
 
@@ -24,3 +31,4 @@ struct EntryParameterView_Previews: PreviewProvider {
         Text("run")
     }
 }
+//
