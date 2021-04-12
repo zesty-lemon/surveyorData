@@ -34,7 +34,7 @@ struct surveyDataView: View {
                         showingDetail = true
                     }, label: {
                         Image(systemName: "plus.circle")
-                            .imageScale(.large)
+                            .font(.system(size: CGFloat(Constants.iconSize)))
                     }))
                     .sheet(isPresented: $showingDetail) {
                         entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
@@ -59,7 +59,7 @@ struct surveyDataView: View {
                     showingDetail = true
                 }, label: {
                     Image(systemName: "plus.circle")
-                        .imageScale(.large)
+                        .font(.system(size: CGFloat(Constants.iconSize)))
                 }))
                 .sheet(isPresented: $showingDetail) {
                     entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)

@@ -15,6 +15,7 @@ import CoreData
 struct surveyIndexView: View {
     @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false
+    @State private var alertIsPresented = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate:NSPredicate(format:"type == %@","Survey")) var surveys: FetchedResults<Survey>
     var body: some View {
         
@@ -29,7 +30,7 @@ struct surveyIndexView: View {
                     }, label: {
                         Image(systemName: "plus.circle")
                             //.imageScale(.large)
-                            .font(.system(size: 30))
+                            .font(.system(size: CGFloat(Constants.iconSize)))
                     }))
                     .sheet(isPresented: $showingDetail) {
                         surveyCreation()
@@ -43,19 +44,25 @@ struct surveyIndexView: View {
                         ){
                             HStack {
                                 Text(eachSurvey.surveyTitle)
+                                
                             }
                         }
                     }
                     .onDelete(perform: deleteSurvey(at:))
+                    .alert(isPresented: $alertIsPresented,
+                           content: {
+                            Alert(title: Text("Delete Survey?"), message: Text("Are you sure you want to delete this survey and all its data? This cannot be undone"), dismissButton: .default(Text("Delete")))
+                           })
                 }
+                
                 .listStyle(PlainListStyle())
-                .navigationBarTitle("All Surveys",displayMode: .inline)
+                .navigationBarTitle("My Surveys",displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
-                    showingDetail = true
+                    showingDetail = true //alertIsPresented = true//
                 }, label: {
                     Image(systemName: "plus.circle")
                         //.imageScale(.large)
-                        .font(.system(size: 30))
+                        .font(.system(size: CGFloat(Constants.iconSize)))
                 }))
                 .sheet(isPresented: $showingDetail) {
                     surveyCreation()
@@ -63,7 +70,11 @@ struct surveyIndexView: View {
             }
         }
     }
+    func callDelete(at offsets: IndexSet){
+        
+    }
     func deleteSurvey(at offsets: IndexSet) {
+        self.alertIsPresented = true
         for eachSurvey in offsets {
             let toDelete = surveys[eachSurvey]
             moc.delete(toDelete)

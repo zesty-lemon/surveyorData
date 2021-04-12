@@ -24,6 +24,7 @@ extension Survey {
     @NSManaged public var containsPhoto: Bool
     //hacky & weird, maybe bug?
     @NSManaged public var type: String
+    @NSManaged public var dateCreated: Date?
     
     //in addition to entry headers, maybe add variables like includeGPS, includeLoac etc
     //returns an ordered list of entries, sorted by time created

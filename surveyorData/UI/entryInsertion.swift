@@ -15,38 +15,41 @@ struct entryInsertion: View {
     @Binding var parentEntryList: [Entry]
     @State private var dataToAdd = [String]()
     @State private var entryHeaders: [String] = []
-    @State private var entryAdditionFields: [EntryParameterView] = []
+    @State private var entryAdditionFields:
+        [EntryParameterView] = []
+    @State var entryLat: Double = 0
+    @State var entryLong: Double = 0
     //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
+
         NavigationView{
-            VStack {
-                //Text(parentSurvey.debugDescription)
-                //Text("Creating Hardcoded Entry")
-                if parentSurvey.containsPhoto == false{
-                    Text("No Photo")
-                }
-                Form{
-                    List(entryAdditionFields, id: \.id){ field in
-                        field
+                VStack {
+                    
+                    Form{
+                        if parentSurvey.containsLocation == true{
+                            LocationSaveView(lat: $entryLat, long: $entryLong)
+                        }
+                        List(entryAdditionFields, id: \.id){ field in
+                            field
+                        }
                     }
                 }
-            }
-            .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }) {
-                                        Text("Cancel").bold()
-                                    }, trailing:
+                .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
+                .navigationBarItems(leading:
                                         Button(action: {
-                                            createEntry()
-                                            needsRefresh = true
                                             presentationMode.wrappedValue.dismiss()
                                         }) {
-                                            Text("Save").bold()
-                                        })
-            
+                                            Text("Cancel").bold()
+                                        }, trailing:
+                                            Button(action: {
+                                                createEntry()
+                                                needsRefresh = true
+                                                presentationMode.wrappedValue.dismiss()
+                                            }) {
+                                                Text("Save").bold()
+                                            })
+                
         }
         .onAppear{
             setupEntry()
@@ -64,9 +67,11 @@ struct entryInsertion: View {
         let newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
         newEntry.entryData = dataToAdd
-        newEntry.lat = 41.7658
-        newEntry.long = 72.6734
         newEntry.survey = parentSurvey //set reference to it's parent survey
+        if parentSurvey.containsLocation == true{
+            newEntry.lat = entryLat
+            newEntry.long = entryLong
+        }
         parentSurvey.addToEntry(newEntry)
         parentEntryList.append(newEntry)
         do {

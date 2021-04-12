@@ -11,6 +11,7 @@
     <entity name="Survey" representedClassName="Survey" syncable="YES">
         <attribute name="containsLocation" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="containsPhoto" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="entryDataTypes" optional="YES" attributeType="Transformable"/>
         <attribute name="entryHeaders" optional="YES" attributeType="Transformable"/>
         <attribute name="surveyTitle" optional="YES" attributeType="String"/>
@@ -19,6 +20,6 @@
     </entity>
     <elements>
         <element name="Entry" positionX="-63" positionY="-18" width="128" height="119"/>
-        <element name="Survey" positionX="-63" positionY="-9" width="128" height="134"/>
+        <element name="Survey" positionX="-63" positionY="-9" width="128" height="149"/>
     </elements>
 </model>

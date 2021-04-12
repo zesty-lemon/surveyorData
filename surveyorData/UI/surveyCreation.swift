@@ -68,6 +68,7 @@ struct surveyCreation: View {
         print(entryHeaders)
         print("dataTypes:")
         print(entryDataTypes)
+        NewSurvey.dateCreated = Date()
         NewSurvey.entryHeaders = entryHeaders
         NewSurvey.entryDataTypes = entryDataTypes
         NewSurvey.containsLocation = usesGPS
