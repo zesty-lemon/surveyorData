@@ -49,16 +49,16 @@ struct surveyIndexView: View {
                         }
                     }
                     .onDelete(perform: deleteSurvey(at:))
-                    .alert(isPresented: $alertIsPresented,
-                           content: {
-                            Alert(title: Text("Delete Survey?"), message: Text("Are you sure you want to delete this survey and all its data? This cannot be undone"), dismissButton: .default(Text("Delete")))
-                           })
+//                    .alert(isPresented: $alertIsPresented,
+//                           content: {
+//                            Alert(title: Text("Delete Survey?"), message: Text("Are you sure you want to delete this survey and all its data? This cannot be undone"), dismissButton: .default(Text("Delete")))
+//                           })
                 }
                 
                 .listStyle(PlainListStyle())
                 .navigationBarTitle("My Surveys",displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
-                    showingDetail = true //alertIsPresented = true//
+                    showingDetail = true
                 }, label: {
                     Image(systemName: "plus.circle")
                         //.imageScale(.large)
@@ -74,7 +74,7 @@ struct surveyIndexView: View {
         
     }
     func deleteSurvey(at offsets: IndexSet) {
-        self.alertIsPresented = true
+        //self.alertIsPresented = true
         for eachSurvey in offsets {
             let toDelete = surveys[eachSurvey]
             moc.delete(toDelete)

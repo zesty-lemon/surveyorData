@@ -10,6 +10,8 @@ import CoreLocation
 
 struct EntryDataView: View {
     @State var entry: Entry
+    @Environment(\.presentationMode) var presentationMode
+    @State var showingDetail = false
     
     var body: some View {
         ScrollView{
@@ -56,16 +58,16 @@ struct EntryDataView: View {
                 }
                 Divider()
             }
-            //            VStack(alignment: .leading) {
-            //                ForEach(entry.survey.entryHeaders, id: \.self){ eachHeader in
-            //                Text("\(eachHeader) : ")
-            //                }
-            //                ForEach(entry.entryData, id: \.self){ eachData in
-            //                Text(eachData)
-            //                }
-            //            }
         }
         .navigationTitle("Sample Data")
+        .navigationBarItems(trailing: Button(action: {
+            showingDetail = true
+        }, label: {
+            Text("Edit")
+        }))
+        .sheet(isPresented: $showingDetail) {
+            ModifyEntryView(entryToModify: $entry)
+        }
     }
 }
 

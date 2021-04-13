@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080D6FD1260286BB00B9A32D /* startScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080D6FD0260286BB00B9A32D /* startScreen.swift */; };
 		0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869D9B3262104C200D0ECDB /* LocationSaveView.swift */; };
 		0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */; };
 		0880B7F926015FD7008ED3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F826015FD7008ED3A5 /* ContentView.swift */; };
@@ -28,9 +27,11 @@
 		08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */; };
 		08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C28B09261122D700C6AA3B /* EntryDataView.swift */; };
 		08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */; };
+		08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DAF9712625E00100142671 /* ModifyParametersView.swift */; };
 		08EB8F6B2624BC6200A9ED1C /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F6A2624BC6200A9ED1C /* CircleImageView.swift */; };
 		08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F862624CA8200A9ED1C /* EntryRowView.swift */; };
 		08EB8F942624D9AC00A9ED1C /* SingleEntryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F932624D9AC00A9ED1C /* SingleEntryMapView.swift */; };
+		08EB8F992624E5DC00A9ED1C /* ModifyEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F982624E5DC00A9ED1C /* ModifyEntryView.swift */; };
 		08F4DA5F2602D811006D4509 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4DA5E2602D811006D4509 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +53,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		080D6FD0260286BB00B9A32D /* startScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startScreen.swift; sourceTree = "<group>"; };
 		0869D9B3262104C200D0ECDB /* LocationSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSaveView.swift; sourceTree = "<group>"; };
 		0880B7F326015FD7008ED3A5 /* surveyorData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surveyorData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyorDataApp.swift; sourceTree = "<group>"; };
@@ -79,9 +79,11 @@
 		08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryParameterView.swift; sourceTree = "<group>"; };
 		08C28B09261122D700C6AA3B /* EntryDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDataView.swift; sourceTree = "<group>"; };
 		08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFieldsView.swift; sourceTree = "<group>"; };
+		08DAF9712625E00100142671 /* ModifyParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyParametersView.swift; sourceTree = "<group>"; };
 		08EB8F6A2624BC6200A9ED1C /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		08EB8F862624CA8200A9ED1C /* EntryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRowView.swift; sourceTree = "<group>"; };
 		08EB8F932624D9AC00A9ED1C /* SingleEntryMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEntryMapView.swift; sourceTree = "<group>"; };
+		08EB8F982624E5DC00A9ED1C /* ModifyEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyEntryView.swift; sourceTree = "<group>"; };
 		08F4DA5E2602D811006D4509 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,12 +200,13 @@
 				0880B849260164DA008ED3A5 /* surveyIndexView.swift */,
 				0880B853260164FF008ED3A5 /* surveyDataView.swift */,
 				0880B841260164B9008ED3A5 /* surveyCreation.swift */,
-				0880B84E260164E6008ED3A5 /* entryInsertion.swift */,
 				0869D9B3262104C200D0ECDB /* LocationSaveView.swift */,
 				08C28B09261122D700C6AA3B /* EntryDataView.swift */,
-				080D6FD0260286BB00B9A32D /* startScreen.swift */,
+				0880B84E260164E6008ED3A5 /* entryInsertion.swift */,
+				08EB8F982624E5DC00A9ED1C /* ModifyEntryView.swift */,
 				08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */,
 				08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */,
+				08DAF9712625E00100142671 /* ModifyParametersView.swift */,
 				08EB8F6F2624BCEB00A9ED1C /* DetailViews */,
 			);
 			path = UI;
@@ -351,15 +354,16 @@
 				0880B80026015FD8008ED3A5 /* Persistence.swift in Sources */,
 				0880B83C2601646F008ED3A5 /* Survey+CoreDataClass.swift in Sources */,
 				0880B7F926015FD7008ED3A5 /* ContentView.swift in Sources */,
+				08EB8F992624E5DC00A9ED1C /* ModifyEntryView.swift in Sources */,
 				0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */,
 				0880B80326015FD8008ED3A5 /* surveyorData.xcdatamodeld in Sources */,
+				08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */,
 				08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */,
 				08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */,
 				08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */,
 				0880B83A2601646F008ED3A5 /* Entry+CoreDataClass.swift in Sources */,
 				0880B842260164B9008ED3A5 /* surveyCreation.swift in Sources */,
 				0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */,
-				080D6FD1260286BB00B9A32D /* startScreen.swift in Sources */,
 				0880B83D2601646F008ED3A5 /* Entry+CoreDataProperties.swift in Sources */,
 				08EB8F6B2624BC6200A9ED1C /* CircleImageView.swift in Sources */,
 				0880B83B2601646F008ED3A5 /* Survey+CoreDataProperties.swift in Sources */,

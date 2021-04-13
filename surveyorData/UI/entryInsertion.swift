@@ -49,7 +49,6 @@ struct entryInsertion: View {
                                             }) {
                                                 Text("Save").bold()
                                             })
-                
         }
         .onAppear{
             setupEntry()
