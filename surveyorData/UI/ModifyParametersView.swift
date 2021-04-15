@@ -16,10 +16,11 @@ struct ModifyParametersView: View, Identifiable {
     @Binding var entryDataTypes: [String]
     
     var body: some View {
-        
         if entryDataTypes[index] == "Number"{
             HStack{
             Text("\(entryHeaders[index]): ")
+              //  https://stackoverflow.com/questions/56471973/how-do-i-create-a-multiline-textfield-in-swiftui
+                //maybe change this to a multiline text view for text only
             TextField(entryData[index], text: $entryData[index])
                 .keyboardType(.decimalPad)
             }

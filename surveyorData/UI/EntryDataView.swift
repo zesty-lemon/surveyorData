@@ -16,19 +16,15 @@ struct EntryDataView: View {
     var body: some View {
         ScrollView{
             if entry.survey.containsLocation {
-                SingleEntryMapView(coordinate: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868))
+                SingleEntryMapView(coordinate: CLLocationCoordinate2D(latitude: entry.lat, longitude:entry.long))
                     .ignoresSafeArea(edges: .top)
                     .frame(height:300)
             }
-            
             if entry.survey.containsPhoto{
                 CircleImageView(image: Image("demo_photo"))
                     .offset(y: -130)
                     .padding(.bottom, -130)
             }
-            //            Text(entry.debugDescription)
-            // Buttwiser - get it, cause it's like the beer, but instead of beer it's a sexy butt
-            //
             VStack(alignment: .leading) {
                 Text("Sample Data")
                     .font(.title)
@@ -51,10 +47,12 @@ struct EntryDataView: View {
             }
             .padding()
             // need to check for off by one errors
+            Text(entry.debugDescription)
             ForEach(0..<entry.entryData.count) { i in
                 HStack{
                     Text("\(entry.survey.entryHeaders[i]): ")
                     Text(entry.entryData[i])
+                    .multilineTextAlignment(.leading)
                 }
                 Divider()
             }

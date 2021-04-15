@@ -12,20 +12,26 @@ import MapKit
 // that way the user does not have to wait
 
 struct LocationSaveView: View {
+    @ObservedObject private var locationManager = LocationManager()
     @Binding var lat: Double
     @Binding var long: Double
     @State var buttonTitle: String = "Save Location"
     
     var body: some View {
-        VStack{
+        //forced unwrapping is ok here, because I check it is not null already
+        let coordinate = self.locationManager.location != nil ?
+            self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
+       return VStack{
             Button(buttonTitle){
-            storeLoc()
+                lat = coordinate.latitude
+                long = coordinate.longitude
+            //storeLoc()
             buttonTitle = "Location Saved. Click to replace"
         }
         }
     }
     public func storeLoc(){
-        //do nothing
         lat = 41.7658
         long = 72.6734
     }

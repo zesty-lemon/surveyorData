@@ -11,6 +11,8 @@ struct entryInsertion: View {
     @Binding var parentSurvey: Survey
     //@Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject private var locationManager = LocationManager()
+    @State var buttonTitle: String = "Save Location"
     @Binding var needsRefresh: Bool
     @Binding var parentEntryList: [Entry]
     @State private var dataToAdd = [String]()
@@ -22,13 +24,19 @@ struct entryInsertion: View {
     //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
-
-        NavigationView{
+        let coordinate = self.locationManager.location != nil ?
+            self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
+        return NavigationView{
                 VStack {
-                    
                     Form{
                         if parentSurvey.containsLocation == true{
-                            LocationSaveView(lat: $entryLat, long: $entryLong)
+                            //LocationSaveView(lat: $entryLat, long: $entryLong)
+                            Button(buttonTitle){
+                                entryLat = coordinate.latitude
+                                entryLong = coordinate.longitude
+                            buttonTitle = "Location Saved. Click to replace"
+                            }
                         }
                         List(entryAdditionFields, id: \.id){ field in
                             field

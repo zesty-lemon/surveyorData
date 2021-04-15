@@ -22,6 +22,7 @@ struct EntryParameterView: View, Identifiable {
         }
         else {
             TextField(entryHeaders[index], text: $entryData[index])
+                .multilineTextAlignment(.leading)
         }
     }
 }

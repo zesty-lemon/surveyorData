@@ -4,7 +4,6 @@
 //
 //  Created by Giles Lemmon on 4/12/21.
 //
-
 import SwiftUI
 
 struct ModifyEntryView: View {
@@ -13,30 +12,13 @@ struct ModifyEntryView: View {
     @Binding var entryToModify: Entry
     @State private var dataToAdd: [String] = []
     @State private var entryHeaders: [String] = []
-    @State private var entryAdditionFields: [ModifyParametersView] = []
-    //now add onappear to instantiate these values
-    
-    
-    //I need to do this the way I did it last time - setup an array of views (yuck) and pass each one the array of data to add as well as its index.  
+    @State private var entryAdditionFields: [ModifyParametersView] = []  
     var body: some View {
         NavigationView{
                 Form{
                     List(entryAdditionFields, id: \.id){ field in
                         field
                     }
-//                    ForEach(0..<entryToModify.entryData.count) { i in
-//                        //HStack{
-//                        //Text("\(entryHeaders[i]): ")
-//                        Text("\(dataToAdd[i])")
-////                            if entryToModify.survey.entryDataTypes[i] == "Number"{
-////                                TextField(entryToModify.entryData[i], text: $dataToAdd[i])
-////                                    .keyboardType(.decimalPad)
-////                            }
-////                            else{
-////                                TextField(entryToModify.entryData[i], text: $dataToAdd[i])
-////                            }
-//                        //}
-//                    }
             }
             .navigationBarTitle(Text("Edit Sample Data"), displayMode: .inline)
             .navigationBarItems(leading:
@@ -67,9 +49,6 @@ struct ModifyEntryView: View {
         
         for i in 0..<dataToAdd.count {
             print("Modifying \(i)")
-//            dataToAdd.append(entryToModify.entryData[i])
-//            entryHeaders.append(entryToModify.survey.entryHeaders[i])
-//            dataToAdd.append("")
             entryAdditionFields.append(ModifyParametersView(index: i,entryData: $dataToAdd, entryHeaders: $entryHeaders, entryDataTypes: $entryToModify.survey.entryDataTypes))
         }
         print("entryData: \(dataToAdd)")

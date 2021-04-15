@@ -24,6 +24,7 @@
 		0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B849260164DA008ED3A5 /* surveyIndexView.swift */; };
 		0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B84E260164E6008ED3A5 /* entryInsertion.swift */; };
 		0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B853260164FF008ED3A5 /* surveyDataView.swift */; };
+		08B41CB8262884670040014F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B41CB7262884670040014F /* LocationManager.swift */; };
 		08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */; };
 		08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C28B09261122D700C6AA3B /* EntryDataView.swift */; };
 		08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */; };
@@ -76,6 +77,7 @@
 		0880B849260164DA008ED3A5 /* surveyIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyIndexView.swift; sourceTree = "<group>"; };
 		0880B84E260164E6008ED3A5 /* entryInsertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entryInsertion.swift; sourceTree = "<group>"; };
 		0880B853260164FF008ED3A5 /* surveyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyDataView.swift; sourceTree = "<group>"; };
+		08B41CB7262884670040014F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryParameterView.swift; sourceTree = "<group>"; };
 		08C28B09261122D700C6AA3B /* EntryDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDataView.swift; sourceTree = "<group>"; };
 		08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFieldsView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		0880B7F526015FD7008ED3A5 /* surveyorData */ = {
 			isa = PBXGroup;
 			children = (
+				08B41CB6262884530040014F /* Managers */,
 				080D6FDB2602D6D700B9A32D /* Constant */,
 				0880B8352601646F008ED3A5 /* Database */,
 				0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */,
@@ -210,6 +213,14 @@
 				08EB8F6F2624BCEB00A9ED1C /* DetailViews */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		08B41CB6262884530040014F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				08B41CB7262884670040014F /* LocationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		08EB8F6F2624BCEB00A9ED1C /* DetailViews */ = {
@@ -358,6 +369,7 @@
 				0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */,
 				0880B80326015FD8008ED3A5 /* surveyorData.xcdatamodeld in Sources */,
 				08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */,
+				08B41CB8262884670040014F /* LocationManager.swift in Sources */,
 				08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */,
 				08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */,
 				08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */,
