@@ -21,7 +21,7 @@ struct EntryDataView: View {
                     .frame(height:300)
             }
             if entry.survey.containsPhoto{
-                CircleImageView(image: Image("demo_photo"))
+                CircleImageView(image: Image(uiImage: UIImage(data: entry.image ?? Data()) ?? UIImage()))
                     .offset(y: -130)
                     .padding(.bottom, -130)
             }

@@ -21,6 +21,20 @@ struct entryInsertion: View {
         [EntryParameterView] = []
     @State var entryLat: Double = 0
     @State var entryLong: Double = 0
+    
+    //image saving properties
+    @State private var image: Image?
+    @State private var showImagePicker = false
+    @State private var inputImage: UIImage?
+    func save() {
+        let pickedImage = inputImage?.jpegData(compressionQuality: 1.0)
+        //  Save to Core Data
+    }
+
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
     //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
@@ -38,10 +52,26 @@ struct entryInsertion: View {
                             buttonTitle = "Location Saved. Click to replace"
                             }
                         }
+                        if parentSurvey.containsPhoto == true{
+                            Section(header: Text("Picture", comment: "Section Header - Picture")) {
+                                if image != nil {
+                                    image!
+                                        .resizable()
+                                        .scaledToFit()
+                                        .onTapGesture { self.showImagePicker.toggle() }
+                                } else {
+                                    Button(action: { self.showImagePicker.toggle() }) {
+                                        Text("Select Image", comment: "Select Image Button")
+                                            .accessibility(identifier: "Select Image")
+                                    }
+                                }
+                            }
+                        }
                         List(entryAdditionFields, id: \.id){ field in
                             field
                         }
                     }
+                    .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
                 }
                 .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
                 .navigationBarItems(leading:
@@ -70,6 +100,7 @@ struct entryInsertion: View {
         }
     }
     func createEntry(){
+        let pickedImage = inputImage?.jpegData(compressionQuality: 1.0)
         let viewContext = PersistenceController.shared.container.viewContext
         let newEntry = Entry(context: viewContext)
         newEntry.timeStamp = Date()
@@ -79,6 +110,7 @@ struct entryInsertion: View {
             newEntry.lat = entryLat
             newEntry.long = entryLong
         }
+        newEntry.image = pickedImage
         parentSurvey.addToEntry(newEntry)
         parentEntryList.append(newEntry)
         do {

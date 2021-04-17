@@ -18,6 +18,7 @@ struct surveyCreation: View {
     @State private var extraFields: [ExtraFieldsView] = []
     @State private var entryDataTypes = [String]()
     @State private var entryHeaders = [String]()
+
     
     var body: some View {
         NavigationView {

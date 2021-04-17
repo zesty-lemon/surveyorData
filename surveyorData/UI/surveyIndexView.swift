@@ -17,7 +17,6 @@ struct surveyIndexView: View {
     @State private var alertIsPresented = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate:NSPredicate(format:"type == %@","Survey")) var surveys: FetchedResults<Survey>
     var body: some View {
-        
         NavigationView{
             if surveys.count == 0 {
                 VStack{

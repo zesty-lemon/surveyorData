@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08300EBF262B67C800FCE57A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08300EBE262B67C800FCE57A /* ImagePicker.swift */; };
 		0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869D9B3262104C200D0ECDB /* LocationSaveView.swift */; };
 		0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */; };
 		0880B7F926015FD7008ED3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F826015FD7008ED3A5 /* ContentView.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08300EBE262B67C800FCE57A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0869D9B3262104C200D0ECDB /* LocationSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSaveView.swift; sourceTree = "<group>"; };
 		0880B7F326015FD7008ED3A5 /* surveyorData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surveyorData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyorDataApp.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		08300EB2262B679400FCE57A /* Image Handling */ = {
+			isa = PBXGroup;
+			children = (
+				08300EBE262B67C800FCE57A /* ImagePicker.swift */,
+			);
+			path = "Image Handling";
+			sourceTree = "<group>";
+		};
 		0880B7EA26015FD7008ED3A5 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 		0880B7F526015FD7008ED3A5 /* surveyorData */ = {
 			isa = PBXGroup;
 			children = (
+				08300EB2262B679400FCE57A /* Image Handling */,
 				08B41CB6262884530040014F /* Managers */,
 				080D6FDB2602D6D700B9A32D /* Constant */,
 				0880B8352601646F008ED3A5 /* Database */,
@@ -383,6 +394,7 @@
 				0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */,
 				08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */,
 				0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */,
+				08300EBF262B67C800FCE57A /* ImagePicker.swift in Sources */,
 				08EB8F942624D9AC00A9ED1C /* SingleEntryMapView.swift in Sources */,
 				0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */,
 			);
