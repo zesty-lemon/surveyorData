@@ -11,7 +11,6 @@ import CoreData
 // see table of all different surveys
 //managedContext is where data is being stored
 
-
 struct surveyIndexView: View {
     @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false

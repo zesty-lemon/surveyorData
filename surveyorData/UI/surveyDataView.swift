@@ -29,6 +29,33 @@ struct surveyDataView: View {
                 VStack{
                     Text("No Samples").font(.largeTitle)
                     Text("Add a sample using the Plus button")
+                        .navigationTitle(parentSurvey.surveyTitle)
+                        .navigationBarItems(trailing: Button(action: {
+                            showingDetail = true
+                        }, label: {
+                            Image(systemName: "plus.circle")
+                                .font(.system(size: CGFloat(Constants.iconSize)))
+                        }))
+                        .sheet(isPresented: $showingDetail) {
+                            entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                        }
+                }
+            }
+            else {
+                VStack{
+                    //here, put little statistics showing like number of samples collected, etc
+                    List{
+                        ForEach(entries, id: \.id) { entry in
+                            NavigationLink(destination:EntryDataView(entry: entry)
+                            ){
+                                HStack {
+                                    Text("Sample: \(entry.timeStamp)")
+                                }
+                            }
+                        }
+                        .onDelete(perform: deleteEntry(at:))
+                    }
+                    .listStyle(PlainListStyle())
                     .navigationTitle(parentSurvey.surveyTitle)
                     .navigationBarItems(trailing: Button(action: {
                         showingDetail = true
@@ -39,30 +66,6 @@ struct surveyDataView: View {
                     .sheet(isPresented: $showingDetail) {
                         entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
                     }
-                }
-            }
-            else {
-                List{
-                    ForEach(entries, id: \.id) { entry in
-                        NavigationLink(destination:EntryDataView(entry: entry)
-                        ){
-                            HStack {
-                                Text("Sample: \(entry.timeStamp)")
-                            }
-                        }
-                    }
-                    .onDelete(perform: deleteEntry(at:))
-                }
-                .listStyle(PlainListStyle())
-                .navigationTitle(parentSurvey.surveyTitle)
-                .navigationBarItems(trailing: Button(action: {
-                    showingDetail = true
-                }, label: {
-                    Image(systemName: "plus.circle")
-                        .font(.system(size: CGFloat(Constants.iconSize)))
-                }))
-                .sheet(isPresented: $showingDetail) {
-                    entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
                 }
             }
         }
