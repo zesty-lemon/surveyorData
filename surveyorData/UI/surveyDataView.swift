@@ -5,6 +5,8 @@
 //
 
 import SwiftUI
+import Foundation
+
 //entries within survey
 struct surveyDataView: View {
     @Environment(\.managedObjectContext) var moc //maybe replace with viewContext?
@@ -43,6 +45,7 @@ struct surveyDataView: View {
             }
             else {
                 VStack{
+                    //need a hstack of buttons here with actions like export etc
                     VStack{
                         Button("Generate CSV"){
                             exportData()
@@ -94,7 +97,9 @@ struct surveyDataView: View {
     func exportData(){
         //need to pass sample ID Numbers
         //need to handle making filenames
+        //need to include locations
         //Need if include photos is checked than photo name
+        //need to pass back a URL
         //just name it after surveyname with spaces stripped, and when creating survey check there are no duplicate names
         let sFileName = "\(parentSurvey.surveyTitle).csv"
         //document directory path
@@ -108,20 +113,41 @@ struct surveyDataView: View {
         csvWriter?.writeField("Survey: ")
         csvWriter?.writeField("\(parentSurvey.surveyTitle)")
         csvWriter?.finishLine()
+        //this can be hardcoded because default is WGS84 and cannot be changed
+        if parentSurvey.containsLocation {
+            csvWriter?.writeField("Coordinate System:")
+            csvWriter?.writeField("WGS84")
+        }
         csvWriter?.finishLine()
         
         //Setup columns in CSV from entryHeaders
         for(field) in parentSurvey.entryHeaders{
             csvWriter?.writeField(field)
         }
+        if parentSurvey.containsLocation {
+            csvWriter?.writeField("lat")
+            csvWriter?.writeField("long")
+        }
         csvWriter?.finishLine()
         
         //Get data in format to import to CSV
         var arrSurveyData = [[String]]()
-        //need some error checking here, to check for off by one errors
+
         //read in all entry values into 2d array
+        //this array will be converted to CSV later
         for eachEntry in parentSurvey.entries(){
-            arrSurveyData.append(eachEntry.entryData)
+            //case when samples have lat long
+            if parentSurvey.containsLocation {
+                var tempArr = [String]()
+                tempArr.append(contentsOf: eachEntry.entryData)
+                tempArr.append("\(eachEntry.lat)")
+                tempArr.append("\(eachEntry.long)")
+                arrSurveyData.append(tempArr)
+            }
+            //when samples don't have lat long
+            else{
+                arrSurveyData.append(eachEntry.entryData)
+            }
         }
         //Import data to the CSV file
         for(elements) in arrSurveyData.enumerated(){
