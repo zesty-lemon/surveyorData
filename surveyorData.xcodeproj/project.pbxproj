@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08300EBF262B67C800FCE57A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08300EBE262B67C800FCE57A /* ImagePicker.swift */; };
 		0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869D9B3262104C200D0ECDB /* LocationSaveView.swift */; };
+		0877FB1E263C688800A8F77C /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0877FB1D263C688800A8F77C /* CHCSVParser.m */; };
 		0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */; };
 		0880B7F926015FD7008ED3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F826015FD7008ED3A5 /* ContentView.swift */; };
 		0880B7FB26015FD8008ED3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0880B7FA26015FD8008ED3A5 /* Assets.xcassets */; };
@@ -57,6 +58,9 @@
 /* Begin PBXFileReference section */
 		08300EBE262B67C800FCE57A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0869D9B3262104C200D0ECDB /* LocationSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSaveView.swift; sourceTree = "<group>"; };
+		0877FB1B263C688700A8F77C /* surveyorData-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "surveyorData-Bridging-Header.h"; sourceTree = "<group>"; };
+		0877FB1C263C688800A8F77C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		0877FB1D263C688800A8F77C /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		0880B7F326015FD7008ED3A5 /* surveyorData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surveyorData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surveyorDataApp.swift; sourceTree = "<group>"; };
 		0880B7F826015FD7008ED3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +136,16 @@
 			path = "Image Handling";
 			sourceTree = "<group>";
 		};
+		0877FB1A263C687900A8F77C /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				0877FB1C263C688800A8F77C /* CHCSVParser.h */,
+				0877FB1D263C688800A8F77C /* CHCSVParser.m */,
+				0877FB1B263C688700A8F77C /* surveyorData-Bridging-Header.h */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		0880B7EA26015FD7008ED3A5 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +169,7 @@
 		0880B7F526015FD7008ED3A5 /* surveyorData */ = {
 			isa = PBXGroup;
 			children = (
+				0877FB1A263C687900A8F77C /* Libraries */,
 				08300EB2262B679400FCE57A /* Image Handling */,
 				08B41CB6262884530040014F /* Managers */,
 				080D6FDB2602D6D700B9A32D /* Constant */,
@@ -311,6 +326,7 @@
 				TargetAttributes = {
 					0880B7F226015FD7008ED3A5 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					0880B80826015FD8008ED3A5 = {
 						CreatedOnToolsVersion = 12.4;
@@ -381,6 +397,7 @@
 				0880B80326015FD8008ED3A5 /* surveyorData.xcdatamodeld in Sources */,
 				08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */,
 				08B41CB8262884670040014F /* LocationManager.swift in Sources */,
+				0877FB1E263C688800A8F77C /* CHCSVParser.m in Sources */,
 				08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */,
 				08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */,
 				08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */,
@@ -553,6 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"surveyorData/Preview Content\"";
 				DEVELOPMENT_TEAM = X8W3L4CSMD;
@@ -565,6 +583,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gileslemmon.surveyorData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "surveyorData/Libraries/surveyorData-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -575,6 +595,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"surveyorData/Preview Content\"";
 				DEVELOPMENT_TEAM = X8W3L4CSMD;
@@ -587,6 +608,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gileslemmon.surveyorData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "surveyorData/Libraries/surveyorData-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

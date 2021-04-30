@@ -71,6 +71,7 @@ struct surveyIndexView: View {
     func callDelete(at offsets: IndexSet){
         
     }
+    //need to add code to delete the csv for this survey as well
     func deleteSurvey(at offsets: IndexSet) {
         //self.alertIsPresented = true
         for eachSurvey in offsets {

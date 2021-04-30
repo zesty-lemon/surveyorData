@@ -47,7 +47,7 @@ struct EntryDataView: View {
             }
             .padding()
             // need to check for off by one errors
-            Text(entry.debugDescription)
+            //Text(entry.debugDescription)
             ForEach(0..<entry.entryData.count) { i in
                 HStack{
                     Text("\(entry.survey.entryHeaders[i]): ")

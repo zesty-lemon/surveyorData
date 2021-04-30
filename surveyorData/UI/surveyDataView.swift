@@ -43,13 +43,33 @@ struct surveyDataView: View {
             }
             else {
                 VStack{
+                    VStack{
+                        Button("Generate CSV"){
+                            exportData()
+                        }
+                        Text("Statistics")
+                            .font(.title)
+                            .foregroundColor(Color.black)
+                        HStack {
+                            Text("Number of samples: ")
+                                .multilineTextAlignment(.center)
+                            //Spacer()
+                            Text(" \(String(parentSurvey.entries().count))")
+                        }
+                        .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
+                        Divider()
+                    }
+                    .padding()
                     //here, put little statistics showing like number of samples collected, etc
+                    Text("Samples in \(parentSurvey.surveyTitle)")
+                        .font(.title)
                     List{
                         ForEach(entries, id: \.id) { entry in
                             NavigationLink(destination:EntryDataView(entry: entry)
                             ){
                                 HStack {
                                     Text("Sample: \(entry.timeStamp)")
+                                        .multilineTextAlignment(.leading)
                                 }
                             }
                         }
@@ -68,6 +88,59 @@ struct surveyDataView: View {
                     }
                 }
             }
+            
+        }
+    }
+    func exportData(){
+        //need to pass sample ID Numbers
+        //need to handle making filenames
+        //Need if include photos is checked than photo name
+        //just name it after surveyname with spaces stripped, and when creating survey check there are no duplicate names
+        let sFileName = "\(parentSurvey.surveyTitle).csv"
+        //document directory path
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        //create nsurl object, append filename to url
+        let documentURL = URL(fileURLWithPath: documentDirectoryPath).appendingPathComponent(sFileName)
+        let output = OutputStream.toMemory()
+        let csvWriter = CHCSVWriter(outputStream: output, encoding: String.Encoding.utf8.rawValue, delimiter: ",".utf16.first!)
+
+        //CSV File Top Stuff
+        csvWriter?.writeField("Survey: ")
+        csvWriter?.writeField("\(parentSurvey.surveyTitle)")
+        csvWriter?.finishLine()
+        csvWriter?.finishLine()
+        
+        //Setup columns in CSV from entryHeaders
+        for(field) in parentSurvey.entryHeaders{
+            csvWriter?.writeField(field)
+        }
+        csvWriter?.finishLine()
+        
+        //Get data in format to import to CSV
+        var arrSurveyData = [[String]]()
+        //need some error checking here, to check for off by one errors
+        //read in all entry values into 2d array
+        for eachEntry in parentSurvey.entries(){
+            arrSurveyData.append(eachEntry.entryData)
+        }
+        //Import data to the CSV file
+        for(elements) in arrSurveyData.enumerated(){
+            //for all the data in each row
+            for i in 0..<elements.element.count {
+                csvWriter?.writeField(elements.element[i])
+            }
+            csvWriter?.finishLine()
+        }
+        csvWriter?.closeStream()
+        
+        // Save CSV
+        let buffer = (output.property(forKey: .dataWrittenToMemoryStreamKey) as? Data)!
+        do{
+            try buffer.write(to: documentURL)
+        }
+        catch
+        {
+            print("little error boi")
         }
     }
     func refresh(){

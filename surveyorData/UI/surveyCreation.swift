@@ -39,7 +39,7 @@ struct surveyCreation: View {
                         Button("Add Field"){
                             entryDataTypes.append("")
                             entryHeaders.append("")
-                            extraFields.append(ExtraFieldsView(index: entryHeaders.count-1,entryDataTypes: $entryDataTypes, entryHeaders: $entryHeaders))
+                            extraFields.append(ExtraFieldsView(index: entryHeaders.count-1, entryHeaders: $entryHeaders))
                             print(debugPrint(extraFields))
                         }
                     }
