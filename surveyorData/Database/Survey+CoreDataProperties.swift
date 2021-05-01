@@ -25,7 +25,7 @@ extension Survey {
     //hacky & weird, maybe bug?
     @NSManaged public var type: String
     @NSManaged public var dateCreated: Date?
-    
+    @NSManaged public var highestEntryId: Int16
     //in addition to entry headers, maybe add variables like includeGPS, includeLoac etc
     //returns an ordered list of entries, sorted by time created
     public func entries() -> [Entry]{

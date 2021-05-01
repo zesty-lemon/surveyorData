@@ -106,6 +106,12 @@ struct entryInsertion: View {
         newEntry.timeStamp = Date()
         newEntry.entryData = dataToAdd
         newEntry.survey = parentSurvey //set reference to it's parent survey
+        print("parent id was \(parentSurvey.highestEntryId)")
+        
+        var tempHighestId = parentSurvey.highestEntryId + 1
+        parentSurvey.highestEntryId = Int16(tempHighestId)
+        newEntry.humanReadableID = parentSurvey.highestEntryId
+        print("parent id is now \(parentSurvey.highestEntryId)")
         if parentSurvey.containsLocation == true{
             newEntry.lat = entryLat
             newEntry.long = entryLong

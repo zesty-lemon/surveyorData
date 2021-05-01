@@ -121,6 +121,7 @@ struct surveyDataView: View {
         csvWriter?.finishLine()
         
         //Setup columns in CSV from entryHeaders
+        csvWriter?.writeField("Sample ID")
         for(field) in parentSurvey.entryHeaders{
             csvWriter?.writeField(field)
         }
@@ -139,6 +140,7 @@ struct surveyDataView: View {
             //case when samples have lat long
             if parentSurvey.containsLocation {
                 var tempArr = [String]()
+                tempArr.append(String(Int(eachEntry.humanReadableID)))
                 tempArr.append(contentsOf: eachEntry.entryData)
                 tempArr.append("\(eachEntry.lat)")
                 tempArr.append("\(eachEntry.long)")
