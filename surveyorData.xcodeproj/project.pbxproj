@@ -35,6 +35,7 @@
 		08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F862624CA8200A9ED1C /* EntryRowView.swift */; };
 		08EB8F942624D9AC00A9ED1C /* SingleEntryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F932624D9AC00A9ED1C /* SingleEntryMapView.swift */; };
 		08EB8F992624E5DC00A9ED1C /* ModifyEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F982624E5DC00A9ED1C /* ModifyEntryView.swift */; };
+		08F48CD0263F1EA700A9944A /* FillImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F48CCF263F1EA700A9944A /* FillImageView.swift */; };
 		08F4DA5F2602D811006D4509 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4DA5E2602D811006D4509 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		08EB8F862624CA8200A9ED1C /* EntryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRowView.swift; sourceTree = "<group>"; };
 		08EB8F932624D9AC00A9ED1C /* SingleEntryMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEntryMapView.swift; sourceTree = "<group>"; };
 		08EB8F982624E5DC00A9ED1C /* ModifyEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyEntryView.swift; sourceTree = "<group>"; };
+		08F48CCF263F1EA700A9944A /* FillImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillImageView.swift; sourceTree = "<group>"; };
 		08F4DA5E2602D811006D4509 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				08EB8F6A2624BC6200A9ED1C /* CircleImageView.swift */,
+				08F48CCF263F1EA700A9944A /* FillImageView.swift */,
 				08EB8F932624D9AC00A9ED1C /* SingleEntryMapView.swift */,
 				08EB8F862624CA8200A9ED1C /* EntryRowView.swift */,
 			);
@@ -412,6 +415,7 @@
 				08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */,
 				0880B854260164FF008ED3A5 /* surveyDataView.swift in Sources */,
 				08300EBF262B67C800FCE57A /* ImagePicker.swift in Sources */,
+				08F48CD0263F1EA700A9944A /* FillImageView.swift in Sources */,
 				08EB8F942624D9AC00A9ED1C /* SingleEntryMapView.swift in Sources */,
 				0880B84A260164DA008ED3A5 /* surveyIndexView.swift in Sources */,
 			);

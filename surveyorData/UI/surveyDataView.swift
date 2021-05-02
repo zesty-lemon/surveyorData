@@ -3,7 +3,7 @@
 //  surveyorData
 //  Created by Giles Lemmon on 3/16/21.
 //
-
+import UIKit //used for the share sheet
 import SwiftUI
 import Foundation
 
@@ -47,19 +47,22 @@ struct surveyDataView: View {
                 VStack{
                     //need a hstack of buttons here with actions like export etc
                     VStack{
-                        Button("Generate CSV"){
-                            exportData()
+                        HStack{
+                            Button(action: {
+                                exportData()
+                            }) {
+                                HStack{
+                                    Text("Export Data")
+                                        .fontWeight(.bold)
+                                    Image(systemName: "tray.and.arrow.up.fill")
+                                }
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.blue, lineWidth: 5)
+                                )
+                            }
                         }
-                        Text("Statistics")
-                            .font(.title)
-                            .foregroundColor(Color.black)
-                        HStack {
-                            Text("Number of samples: ")
-                                .multilineTextAlignment(.center)
-                            //Spacer()
-                            Text(" \(String(parentSurvey.entries().count))")
-                        }
-                        .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
                         Divider()
                     }
                     .padding()
@@ -108,7 +111,7 @@ struct surveyDataView: View {
         let documentURL = URL(fileURLWithPath: documentDirectoryPath).appendingPathComponent(sFileName)
         let output = OutputStream.toMemory()
         let csvWriter = CHCSVWriter(outputStream: output, encoding: String.Encoding.utf8.rawValue, delimiter: ",".utf16.first!)
-
+        
         //CSV File Top Stuff
         csvWriter?.writeField("Survey: ")
         csvWriter?.writeField("\(parentSurvey.surveyTitle)")
@@ -133,7 +136,7 @@ struct surveyDataView: View {
         
         //Get data in format to import to CSV
         var arrSurveyData = [[String]]()
-
+        
         //read in all entry values into 2d array
         //this array will be converted to CSV later
         for eachEntry in parentSurvey.entries(){
@@ -168,7 +171,7 @@ struct surveyDataView: View {
         }
         catch
         {
-            print("little error boi")
+            print("save error")
         }
     }
     func refresh(){
