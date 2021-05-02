@@ -8,10 +8,15 @@
 import SwiftUI
 import CoreLocation
 
+enum ModalView {
+    case photo
+    case edit
+}
 struct EntryDataView: View {
     @State var entry: Entry
     @Environment(\.presentationMode) var presentationMode
-    @State var showingDetail = false
+    @State var modalView: ModalView = .edit
+    @State var isSheetShown = false
     
     var body: some View {
         ScrollView{
@@ -21,9 +26,22 @@ struct EntryDataView: View {
                     .frame(height:300)
             }
             if entry.survey.containsPhoto{
-                CircleImageView(image: Image(uiImage: UIImage(data: entry.image ?? Data()) ?? UIImage()))
+//                CircleImageView(image: Image(uiImage: UIImage(data: entry.image ?? Data()) ?? UIImage()))
+                //clickable photo that shows the photo in full screen
+                Button(action: {
+                    self.modalView = .photo //set modal view to be the photo case
+                    self.isSheetShown = true
+                }){
+                    Image(uiImage: UIImage(data: entry.image ?? Data())!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .shadow(radius: 5)
+                        .frame(width: 200)
+                }
                     .offset(y: -130)
-                    .padding(.bottom, -130)
+                    .padding(.bottom, -180)
             }
             VStack(alignment: .leading) {
                 Text("Sample Data")
@@ -59,13 +77,21 @@ struct EntryDataView: View {
         }
         .navigationTitle("Sample Data")
         .navigationBarItems(trailing: Button(action: {
-            showingDetail = true
+            self.modalView = .edit
+            self.isSheetShown = true
         }, label: {
             Text("Edit")
         }))
-        .sheet(isPresented: $showingDetail) {
-            ModifyEntryView(entryToModify: $entry)
-        }
+        // switch between showing edit view and photo view
+        .sheet(isPresented: $isSheetShown, onDismiss: {
+            self.isSheetShown = false
+        }, content: {
+            if self.modalView == .edit {
+                ModifyEntryView(entryToModify: $entry)
+            } else if self.modalView == .photo {
+                FillImageView(image: Image(uiImage: UIImage(data: entry.image ?? Data()) ?? UIImage()))
+            }
+        })
     }
 }
 

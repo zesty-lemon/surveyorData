@@ -69,12 +69,13 @@ struct surveyDataView: View {
                     //here, put little statistics showing like number of samples collected, etc
                     Text("Samples in \(parentSurvey.surveyTitle)")
                         .font(.title)
+                    //Show all samples in a given survey
                     List{
                         ForEach(entries, id: \.id) { entry in
                             NavigationLink(destination:EntryDataView(entry: entry)
                             ){
                                 HStack {
-                                    Text("Sample: \(entry.timeStamp)")
+                                    Text("Sample \(entry.humanReadableID) - \(formatTime(entry.timeStamp)) on \(formatDate(entry.timeStamp))")
                                         .multilineTextAlignment(.leading)
                                 }
                             }
@@ -174,6 +175,21 @@ struct surveyDataView: View {
             print("save error")
         }
     }
+    //returns a date formatted as a string
+    func formatDate(_ date: Date) -> String
+        {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        return dateFormatter.string(from: date)
+        }
+    func formatTime(_ date: Date) -> String
+        {
+            let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: date)
+        }
+    
     func refresh(){
         //entries = parentSurvey.entries()
         needsRefresh = false

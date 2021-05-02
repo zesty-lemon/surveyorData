@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08300EBF262B67C800FCE57A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08300EBE262B67C800FCE57A /* ImagePicker.swift */; };
+		0859046A263F43BA00B6AE30 /* ConstantFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08590469263F43BA00B6AE30 /* ConstantFunctions.swift */; };
 		0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869D9B3262104C200D0ECDB /* LocationSaveView.swift */; };
 		0877FB1E263C688800A8F77C /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0877FB1D263C688800A8F77C /* CHCSVParser.m */; };
 		0880B7F726015FD7008ED3A5 /* surveyorDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		08300EBE262B67C800FCE57A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		08590469263F43BA00B6AE30 /* ConstantFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantFunctions.swift; sourceTree = "<group>"; };
 		0869D9B3262104C200D0ECDB /* LocationSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSaveView.swift; sourceTree = "<group>"; };
 		0877FB1B263C688700A8F77C /* surveyorData-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "surveyorData-Bridging-Header.h"; sourceTree = "<group>"; };
 		0877FB1C263C688800A8F77C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				08F4DA5E2602D811006D4509 /* Constants.swift */,
+				08590469263F43BA00B6AE30 /* ConstantFunctions.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				0880B83C2601646F008ED3A5 /* Survey+CoreDataClass.swift in Sources */,
 				0880B7F926015FD7008ED3A5 /* ContentView.swift in Sources */,
 				08EB8F992624E5DC00A9ED1C /* ModifyEntryView.swift in Sources */,
+				0859046A263F43BA00B6AE30 /* ConstantFunctions.swift in Sources */,
 				0880B84F260164E6008ED3A5 /* entryInsertion.swift in Sources */,
 				0880B80326015FD8008ED3A5 /* surveyorData.xcdatamodeld in Sources */,
 				08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */,
