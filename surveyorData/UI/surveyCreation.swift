@@ -11,15 +11,13 @@ import SwiftUI
 struct surveyCreation: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-    
     @State private var surveyTitle = ""
     @State private var usesGPS = false
     @State private var usesPhoto = false
     @State private var extraFields: [ExtraFieldsView] = []
-    @State private var entryDataTypes = [String]()
     @State private var entryHeaders = [String]()
 
-    
+    //just do it like normal, call ondelete and strip null values from the end neer mind need to consider index
     var body: some View {
         NavigationView {
             VStack {
@@ -34,13 +32,13 @@ struct surveyCreation: View {
                             ForEach(extraFields, id: \.id) { field in
                                 field
                             }
+                            .onDelete(perform: self.removeField)
                         }
+                        
                         //add an "on delete" method here
                         Button("Add Field"){
-                            entryDataTypes.append("")
                             entryHeaders.append("")
                             extraFields.append(ExtraFieldsView(index: entryHeaders.count-1, entryHeaders: $entryHeaders))
-                            print(debugPrint(extraFields))
                         }
                     }
                 }
@@ -61,17 +59,43 @@ struct surveyCreation: View {
                                         })
         }
     }
-    
+    func removeField(at indexSet: IndexSet) {
+        //this is a weird way of getting around the fact that
+        //state variables in a child view are immutable for some reason
+        let index = indexSet[indexSet.startIndex]
+        //if deleting not the last or first element
+        print("extrafields count: \(extraFields.count)")
+        //if deleting last object
+        if index < extraFields.count-1 && extraFields.count != 0{
+            for i in index+1..<extraFields.count{
+                print("resetting \(i)")
+                extraFields[i].index = extraFields[i].index-1
+            }
+        }
+        print("Before removal: \(entryHeaders)")
+        if index != entryHeaders.count-1 {
+            self.extraFields.remove(atOffsets: indexSet)
+            self.entryHeaders.remove(at: index)
+        }
+        //last element crashes because the fucking cunt drunk 4 year old child who wrote this can go get fucked there's no reason why this doesn't work
+        print("Printing Indexes")
+        for j in 0..<extraFields.count{
+            print("\(extraFields[j].index)")
+        }
+        print("removing at index: \(index)")
+        print("after removal: \(entryHeaders)")
+        //reset indexes of all elements down the list
+        //to account for deletion of the entryHeaders element
+    }
+    func lastDelete(){
+        self.entryHeaders.removeLast()
+    }
+
     func createSurvey() -> Void{
         let NewSurvey = Survey(context: viewContext)
         NewSurvey.surveyTitle = surveyTitle
-        print("headers")
-        print(entryHeaders)
-        print("dataTypes:")
-        print(entryDataTypes)
         NewSurvey.dateCreated = Date()
         NewSurvey.entryHeaders = entryHeaders
-        NewSurvey.entryDataTypes = entryDataTypes
         NewSurvey.containsLocation = usesGPS
         NewSurvey.containsPhoto = usesPhoto
         NewSurvey.type = "Survey"
@@ -81,7 +105,6 @@ struct surveyCreation: View {
             //save to database
             //before I save, maybe here I run the code to make the headers the ones from the file?
             try viewContext.save()
-            print("Survey Saved")
             presentationMode.wrappedValue.dismiss()
             
         } catch {

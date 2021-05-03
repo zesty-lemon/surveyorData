@@ -24,7 +24,6 @@ struct surveyDataView: View {
         }
     }
     var body: some View {
-        
         VStack {
             //Text(parentSurvey.debugDescription)
             if entries.count == 0 {
@@ -66,7 +65,6 @@ struct surveyDataView: View {
                         Divider()
                     }
                     .padding()
-                    //here, put little statistics showing like number of samples collected, etc
                     Text("Samples in \(parentSurvey.surveyTitle)")
                         .font(.title)
                     //Show all samples in a given survey
@@ -98,7 +96,7 @@ struct surveyDataView: View {
             
         }
     }
-    func exportData(){
+    func exportData() -> URL{
         //need to pass sample ID Numbers
         //need to handle making filenames
         //need to include locations
@@ -174,6 +172,7 @@ struct surveyDataView: View {
         {
             print("save error")
         }
+        return documentURL
     }
     //returns a date formatted as a string
     func formatDate(_ date: Date) -> String

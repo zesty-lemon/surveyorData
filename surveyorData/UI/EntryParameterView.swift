@@ -15,15 +15,8 @@ struct EntryParameterView: View, Identifiable {
     @Binding var entryDataTypes: [String]
     
     var body: some View {
-        
-        if entryDataTypes[index] == "Number"{
-            TextField(entryHeaders[index], text: $entryData[index])
-                .keyboardType(.decimalPad)
-        }
-        else {
             TextField(entryHeaders[index], text: $entryData[index])
                 .multilineTextAlignment(.leading)
-        }
     }
 }
 
@@ -32,4 +25,3 @@ struct EntryParameterView_Previews: PreviewProvider {
         Text("run")
     }
 }
-//
