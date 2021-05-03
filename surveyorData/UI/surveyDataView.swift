@@ -13,6 +13,7 @@ struct surveyDataView: View {
     @State var parentSurvey: Survey
     @State var showingDetail = false
     @State var entries: [Entry]
+    @State var exportItems: [Any] = []
     @State var needsRefresh: Bool = true {
         didSet{
             print("It's set")
@@ -48,7 +49,8 @@ struct surveyDataView: View {
                     VStack{
                         HStack{
                             Button(action: {
-                                exportData()
+                                shareCSV(toExport: exportData())
+                                //exportData()
                             }) {
                                 HStack{
                                     Text("Export Data")
@@ -201,6 +203,11 @@ struct surveyDataView: View {
             entries.remove(at: index)
         }
         try? moc.save()
+    }
+    func shareCSV(toExport: Any){
+        let infoU = toExport
+        let av = UIActivityViewController(activityItems: [infoU], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 

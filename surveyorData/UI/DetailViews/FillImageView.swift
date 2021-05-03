@@ -10,18 +10,13 @@ import SwiftUI
 struct FillImageView: View {
     var image: Image
     @Environment(\.presentationMode) var presentationMode
-    @State private var isShareSheetShowing = false
-    @State private var isSheetShowing = false
     @State var items: [Any] = []
     var body: some View {
         //change this to be dynamically, which is basically impossible
         NavigationView{
             VStack{
                 Button(action: {
-                    //shareButton()
-                    items.removeAll()
-                    items.append(image)
-                    isSheetShowing.toggle()
+                    sharePhoto(Info: "test")
                 }) {
                     HStack{
                         Text("Share Photo")
@@ -47,27 +42,13 @@ struct FillImageView: View {
                                         Text("Done").bold()
                                     })
         }
-        .sheet(isPresented: $isSheetShowing, content: {
-            ShareSheet(items: items)
-        })
-    }
-    // export image button
-    func shareButton(){
-        isShareSheetShowing.toggle()
-        let url = URL(string: "https://apple.com")
-        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
     
-    struct ShareSheet: UIViewControllerRepresentable {
-        var items : [Any]
-        func makeUIViewController(context: Context) -> some UIViewController {
-            let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            return controller
-        }
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            //do nothing
-        }
+    //issues come from sharing a photo within the modal sheet.  Maybe I can call dismiss on this sheet, and set a flag in the parent view that itself calls the sharePhoto method.  
+    func sharePhoto(Info: String){
+        let infoU = Info
+        let av = UIActivityViewController(activityItems: [infoU], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 
