@@ -13,7 +13,6 @@
         <attribute name="containsLocation" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="containsPhoto" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="entryDataTypes" optional="YES" attributeType="Transformable"/>
         <attribute name="entryHeaders" optional="YES" attributeType="Transformable"/>
         <attribute name="highestEntryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="surveyTitle" optional="YES" attributeType="String"/>
@@ -22,6 +21,6 @@
     </entity>
     <elements>
         <element name="Entry" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="Survey" positionX="-63" positionY="-9" width="128" height="164"/>
+        <element name="Survey" positionX="-63" positionY="-9" width="128" height="149"/>
     </elements>
 </model>

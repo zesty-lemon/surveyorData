@@ -96,7 +96,7 @@ struct entryInsertion: View {
         for i in 0..<parentSurvey.entryHeaders.count {
             dataToAdd.append("")
             entryHeaders.append(parentSurvey.entryHeaders[i])
-            entryAdditionFields.append(EntryParameterView(index: dataToAdd.count-1,entryData: $dataToAdd, entryHeaders: $entryHeaders, entryDataTypes: $parentSurvey.entryDataTypes))
+            entryAdditionFields.append(EntryParameterView(index: dataToAdd.count-1,entryData: $dataToAdd, entryHeaders: $entryHeaders))
         }
     }
     func createEntry(){

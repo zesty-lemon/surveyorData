@@ -35,13 +35,11 @@ struct ModifyEntryView: View {
                                         })
         }
         .onAppear{
-            print("actally got here")
             setup()
         }
     }
     
     func setup(){
-        print("In Setup")
         print("EntryData looks like \(entryToModify.entryData)")
         dataToAdd = entryToModify.entryData
         entryHeaders = entryToModify.survey.entryHeaders
@@ -49,12 +47,13 @@ struct ModifyEntryView: View {
         
         for i in 0..<dataToAdd.count {
             print("Modifying \(i)")
-            entryAdditionFields.append(ModifyParametersView(index: i,entryData: $dataToAdd, entryHeaders: $entryHeaders, entryDataTypes: $entryToModify.survey.entryDataTypes))
+            entryAdditionFields.append(ModifyParametersView(index: i,entryData: $dataToAdd, entryHeaders: $entryHeaders))
         }
         print("entryData: \(dataToAdd)")
         print("entryHeaders: \(entryHeaders)")
         print("DataToAdd now has a length of : \(dataToAdd.count)")
     }
+    
     func modifyEntry(){
         print("Inserting data: \(dataToAdd)")
         entryToModify.entryData = dataToAdd

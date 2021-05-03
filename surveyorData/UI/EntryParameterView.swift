@@ -12,7 +12,6 @@ struct EntryParameterView: View, Identifiable {
     let index: Int
     @Binding var entryData: [String]
     @Binding var entryHeaders: [String]
-    @Binding var entryDataTypes: [String]
     
     var body: some View {
             TextField(entryHeaders[index], text: $entryData[index])
