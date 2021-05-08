@@ -85,6 +85,7 @@ struct surveyCreation: View {
                                         })
         }
     }
+    
     func removeField(at offsets: IndexSet) {
         print("removing")
         myFields.addedFields.remove(atOffsets: offsets)
