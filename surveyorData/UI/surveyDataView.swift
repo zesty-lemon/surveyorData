@@ -6,14 +6,22 @@
 import UIKit //used for the share sheet
 import SwiftUI
 import Foundation
-
+import MapKit
+enum SurveyModalView {
+    case insertion
+    case map
+}
 //entries within survey
 struct surveyDataView: View {
     @Environment(\.managedObjectContext) var moc //maybe replace with viewContext?
+    @Environment(\.presentationMode) var presentationMode
     @State var parentSurvey: Survey
     @State var showingDetail = false
     @State var entries: [Entry]
     @State var exportItems: [Any] = []
+    @State var modalView: SurveyModalView = .insertion
+    @State var isSheetShown = false
+    
     @State var needsRefresh: Bool = true {
         didSet{
             print("It's set")
@@ -26,21 +34,29 @@ struct surveyDataView: View {
     }
     var body: some View {
         VStack {
-            //Text(parentSurvey.debugDescription)
             if entries.count == 0 {
                 VStack{
                     Text("No Samples").font(.largeTitle)
                     Text("Add a sample using the Plus button")
                         .navigationTitle(parentSurvey.surveyTitle)
                         .navigationBarItems(trailing: Button(action: {
-                            showingDetail = true
+                            self.modalView = .insertion //set modal view to be the photo case
+                            self.isSheetShown = true
+                            //showingDetail = true
                         }, label: {
                             Image(systemName: "plus.circle")
                                 .font(.system(size: CGFloat(Constants.iconSize)))
                         }))
-                        .sheet(isPresented: $showingDetail) {
-                            entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
-                        }
+                        .sheet(isPresented: $isSheetShown, onDismiss: {
+                            self.isSheetShown = false
+                        }, content: {
+                            if self.modalView == .insertion {
+                                entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                            }
+                        })
+                    //                        .sheet(isPresented: $showingDetail) {
+                    //                            entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                    //                        }
                 }
             }
             else {
@@ -53,15 +69,33 @@ struct surveyDataView: View {
                                 //exportData()
                             }) {
                                 HStack{
-                                    Text("Export Data")
+                                    Text("Export")
                                         .fontWeight(.bold)
                                     Image(systemName: "tray.and.arrow.up.fill")
                                 }
                                 .padding()
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.blue, lineWidth: 5)
+                                        .stroke(Color.blue, lineWidth: 4)
                                 )
+                            }
+                            //only show map button if there are coordinates saved
+                            if (parentSurvey.containsLocation){
+                                Button(action: {
+                                    self.modalView = .map //set modal view to be the photo case
+                                    self.isSheetShown = true
+                                }) {
+                                    HStack{
+                                        Text("Map")
+                                            .fontWeight(.bold)
+                                        Image(systemName: "map")
+                                    }
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.blue, lineWidth: 4)
+                                    )
+                                }
                             }
                         }
                         Divider()
@@ -85,18 +119,39 @@ struct surveyDataView: View {
                     .listStyle(PlainListStyle())
                     .navigationTitle(parentSurvey.surveyTitle)
                     .navigationBarItems(trailing: Button(action: {
-                        showingDetail = true
+                        self.modalView = .insertion //set modal view to be the photo case
+                        self.isSheetShown = true
+                        //showingDetail = true
                     }, label: {
                         Image(systemName: "plus.circle")
                             .font(.system(size: CGFloat(Constants.iconSize)))
                     }))
-                    .sheet(isPresented: $showingDetail) {
-                        entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
-                    }
+                    .sheet(isPresented: $isSheetShown, onDismiss: {
+                        self.isSheetShown = false
+                    }, content: {
+                        if self.modalView == .insertion {
+                            entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                        }
+                        else if self.modalView == .map{
+                            SamplesMapView(coordinates: getAllCoordinates())
+                        }
+                    })
+                    //                    .sheet(isPresented: $showingDetail) {
+                    //                        entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
+                    //                    }
                 }
             }
             
         }
+    }
+    func getAllCoordinates() -> [CLLocationCoordinate2D]{
+        var coordinates = [CLLocationCoordinate2D]()
+        for eachEntry in parentSurvey.entries(){
+            if parentSurvey.containsLocation {
+                coordinates.append(CLLocationCoordinate2D(latitude: eachEntry.lat, longitude: eachEntry.long))
+            }
+        }
+        return coordinates
     }
     func exportData() -> URL{
         //need to pass sample ID Numbers
@@ -178,18 +233,18 @@ struct surveyDataView: View {
     }
     //returns a date formatted as a string
     func formatDate(_ date: Date) -> String
-        {
+    {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YYYY"
         return dateFormatter.string(from: date)
-        }
+    }
     func formatTime(_ date: Date) -> String
-        {
-            let dateFormatter = DateFormatter()
+    {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: date)
-        }
+    }
     
     func refresh(){
         //entries = parentSurvey.entries()
