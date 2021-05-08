@@ -6,16 +6,41 @@
 //
 
 import SwiftUI
-//insert a survey
+import Combine
+import Foundation
 
+//insert a survey
+//field stores an ID and the fieldname
+class Field: ObservableObject,Identifiable{
+    var id = UUID()
+    @Published var fieldName: String
+    init(startingText: String){
+        self.fieldName = startingText
+    }
+}
+//user entered fields are stored in an array inside an observable object
+//this allows UI to mutate values inside the fields views
+//as well as insert/delete operations
+class Fields: ObservableObject{
+    @Published var addedFields: [Field]
+    init(){
+        self.addedFields = []
+    }
+}
+//struct for each new field added
+struct FieldRow: View {
+    @ObservedObject var singleField: Field
+    var body: some View {
+        TextField("Field Name (Units)", text: $singleField.fieldName)
+    }
+}
 struct surveyCreation: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @State private var surveyTitle = ""
     @State private var usesGPS = false
     @State private var usesPhoto = false
-    @State private var extraFields: [ExtraFieldsView] = []
-    @State private var entryHeaders = [String]()
+    @ObservedObject var myFields: Fields = Fields.init()
 
     //just do it like normal, call ondelete and strip null values from the end neer mind need to consider index
     var body: some View {
@@ -29,16 +54,17 @@ struct surveyCreation: View {
                         Toggle("Include Photo", isOn: $usesPhoto)
                         Toggle("Include GPS Location", isOn: $usesGPS)
                         List{
-                            ForEach(extraFields, id: \.id) { field in
-                                field
+                            ForEach(myFields.addedFields){ everyfield in
+                                FieldRow(singleField: everyfield)
                             }
-                            .onDelete(perform: self.removeField)
+                            .onDelete(perform: removeField)
                         }
                         
                         //add an "on delete" method here
-                        Button("Add Field"){
-                            entryHeaders.append("")
-                            extraFields.append(ExtraFieldsView(index: entryHeaders.count-1, entryHeaders: $entryHeaders))
+                        Button(action: {
+                            self.myFields.addedFields.append(Field(startingText: ""))
+                        }) {
+                            Text("Add Field")
                         }
                     }
                 }
@@ -59,43 +85,28 @@ struct surveyCreation: View {
                                         })
         }
     }
-    func removeField(at indexSet: IndexSet) {
-        //this is a weird way of getting around the fact that
-        //state variables in a child view are immutable for some reason
-        let index = indexSet[indexSet.startIndex]
-        //if deleting not the last or first element
-        print("extrafields count: \(extraFields.count)")
-        //if deleting last object
-        if index < extraFields.count-1 && extraFields.count != 0{
-            for i in index+1..<extraFields.count{
-                print("resetting \(i)")
-                extraFields[i].index = extraFields[i].index-1
-            }
-        }
-        print("Before removal: \(entryHeaders)")
-        if index != entryHeaders.count-1 {
-            self.extraFields.remove(atOffsets: indexSet)
-            self.entryHeaders.remove(at: index)
-        }
-        //last element crashes because the fucking cunt drunk 4 year old child who wrote this can go get fucked there's no reason why this doesn't work
-        print("Printing Indexes")
-        for j in 0..<extraFields.count{
-            print("\(extraFields[j].index)")
-        }
-        print("removing at index: \(index)")
-        print("after removal: \(entryHeaders)")
-        //reset indexes of all elements down the list
-        //to account for deletion of the entryHeaders element
+    func removeField(at offsets: IndexSet) {
+        print("removing")
+        myFields.addedFields.remove(atOffsets: offsets)
     }
-    func lastDelete(){
-        self.entryHeaders.removeLast()
-    }
-
+    
     func createSurvey() -> Void{
+        
         let NewSurvey = Survey(context: viewContext)
         NewSurvey.surveyTitle = surveyTitle
         NewSurvey.dateCreated = Date()
-        NewSurvey.entryHeaders = entryHeaders
+        var tempFieldValues = [String]()
+        //if there are more than 1 or more fields to add
+        if (myFields.addedFields.count>0){
+            for i in 0..<myFields.addedFields.count{
+                //only add fields if they are not blank
+                if(myFields.addedFields[i].fieldName != ""){
+                    tempFieldValues.append(myFields.addedFields[i].fieldName)
+                }
+            }
+        }
+        //write survey init methods to stop weird erroers
+        NewSurvey.entryHeaders.append(contentsOf: tempFieldValues)
         NewSurvey.containsLocation = usesGPS
         NewSurvey.containsPhoto = usesPhoto
         NewSurvey.type = "Survey"
