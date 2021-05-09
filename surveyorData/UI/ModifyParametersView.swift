@@ -18,8 +18,9 @@ struct ModifyParametersView: View, Identifiable {
         
         HStack{
             Text("\(entryHeaders[index]): ")
+                .foregroundColor(.blue)
+                .multilineTextAlignment(.leading)
             TextField(entryData[index], text: $entryData[index])
-            
         }
     }
 }

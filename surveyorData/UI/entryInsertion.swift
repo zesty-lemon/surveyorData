@@ -26,67 +26,97 @@ struct entryInsertion: View {
     @State private var image: Image?
     @State private var showImagePicker = false
     @State private var inputImage: UIImage?
-    func save() {
-        let pickedImage = inputImage?.jpegData(compressionQuality: 1.0)
-        //  Save to Core Data
-    }
-
+    //    func save() {
+    //        let pickedImage = inputImage?.jpegData(compressionQuality: 1.0)
+    //        //  Save to Core Data
+    //    }
+    
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
-    //https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/
     
     var body: some View {
         let coordinate = self.locationManager.location != nil ?
             self.locationManager.location!.coordinate : CLLocationCoordinate2D()
         
         return NavigationView{
-                VStack {
-                    Form{
-                        if parentSurvey.containsLocation == true{
+            VStack {
+                Form{
+                    //save location button
+                    if parentSurvey.containsLocation == true{
+                        Section(header: Text("Location", comment: "Section Header - Location")) {
                             //LocationSaveView(lat: $entryLat, long: $entryLong)
-                            Button(buttonTitle){
+                            Button(action: {
                                 entryLat = coordinate.latitude
                                 entryLong = coordinate.longitude
-                            buttonTitle = "Location Saved. Click to replace"
+                                buttonTitle = "Tap to Replace"
+                            }){
+                                HStack(alignment: .center){
+                                    Text(buttonTitle)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                    Image(systemName: "map")
+                                }
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.blue, lineWidth: 4)
+                                )
+                                .frame(maxWidth: .infinity, alignment: .center)
                             }
                         }
-                        if parentSurvey.containsPhoto == true{
-                            Section(header: Text("Picture", comment: "Section Header - Picture")) {
-                                if image != nil {
-                                    image!
-                                        .resizable()
-                                        .scaledToFit()
-                                        .onTapGesture { self.showImagePicker.toggle() }
-                                } else {
-                                    Button(action: { self.showImagePicker.toggle() }) {
-                                        Text("Select Image", comment: "Select Image Button")
-                                            .accessibility(identifier: "Select Image")
+                    }
+                    if parentSurvey.containsPhoto == true{
+                        Section(header: Text("Photo", comment: "Section Header - Picture")) {
+                            if image != nil {
+                                image!
+                                    .resizable()
+                                    .scaledToFit()
+                                    .onTapGesture { self.showImagePicker.toggle() }
+                                Text("Tap Photo to Replace")
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .foregroundColor(.blue)
+                            } else {
+                                Button(action: { self.showImagePicker.toggle() }) {
+                                    HStack(alignment: .center){
+                                        Text("Select Photo")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.blue)
+                                        Image(systemName: "camera.fill")
                                     }
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.blue, lineWidth: 4)
+                                    )
+                                    .frame(maxWidth: .infinity, alignment: .center)
                                 }
                             }
                         }
+                    }
+                    Section(header: Text("Data", comment: "Section Header - Picture")) {
                         List(entryAdditionFields, id: \.id){ field in
                             field
                         }
                     }
-                    .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
                 }
-                .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
-                .navigationBarItems(leading:
+                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
+            }
+            .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
+            .navigationBarItems(leading:
+                                    Button(action: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }) {
+                                        Text("Cancel").bold()
+                                    }, trailing:
                                         Button(action: {
+                                            createEntry()
+                                            needsRefresh = true
                                             presentationMode.wrappedValue.dismiss()
                                         }) {
-                                            Text("Cancel").bold()
-                                        }, trailing:
-                                            Button(action: {
-                                                createEntry()
-                                                needsRefresh = true
-                                                presentationMode.wrappedValue.dismiss()
-                                            }) {
-                                                Text("Save").bold()
-                                            })
+                                            Text("Save").bold()
+                                        })
         }
         .onAppear{
             setupEntry()
@@ -107,7 +137,6 @@ struct entryInsertion: View {
         newEntry.entryData = dataToAdd
         newEntry.survey = parentSurvey //set reference to it's parent survey
         print("parent id was \(parentSurvey.highestEntryId)")
-        
         var tempHighestId = parentSurvey.highestEntryId + 1
         parentSurvey.highestEntryId = Int16(tempHighestId)
         newEntry.humanReadableID = parentSurvey.highestEntryId

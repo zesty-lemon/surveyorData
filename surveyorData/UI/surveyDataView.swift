@@ -71,12 +71,13 @@ struct surveyDataView: View {
                                 HStack{
                                     Text("Export")
                                         .fontWeight(.bold)
+                                        .foregroundColor(.green)
                                     Image(systemName: "tray.and.arrow.up.fill")
                                 }
                                 .padding()
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.blue, lineWidth: 4)
+                                        .stroke(Color.green, lineWidth: 4)
                                 )
                             }
                             //only show map button if there are coordinates saved
@@ -88,12 +89,13 @@ struct surveyDataView: View {
                                     HStack{
                                         Text("Map")
                                             .fontWeight(.bold)
+                                            .foregroundColor(.green)
                                         Image(systemName: "map")
                                     }
                                     .padding()
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.blue, lineWidth: 4)
+                                            .stroke(Color.green, lineWidth: 4)
                                     )
                                 }
                             }
@@ -133,7 +135,7 @@ struct surveyDataView: View {
                             entryInsertion(parentSurvey: $parentSurvey, needsRefresh: $needsRefresh,parentEntryList: $entries)
                         }
                         else if self.modalView == .map{
-                            SamplesMapView(coordinates: getAllCoordinates())
+                            SamplesMapView(inputCoordinates: getAllCoordinates())
                         }
                     })
                     //                    .sheet(isPresented: $showingDetail) {

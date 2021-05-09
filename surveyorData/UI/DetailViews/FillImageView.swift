@@ -15,20 +15,20 @@ struct FillImageView: View {
         //change this to be dynamically, which is basically impossible
         NavigationView{
             VStack{
-                Button(action: {
-                    sharePhoto(Info: "test")
-                }) {
-                    HStack{
-                        Text("Share Photo")
-                            .fontWeight(.bold)
-                        Image(systemName: "tray.and.arrow.up.fill")
-                    }
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.blue, lineWidth: 3)
-                    )
-                }
+//                Button(action: {
+//                    sharePhoto(Info: "test")
+//                }) {
+//                    HStack{
+//                        Text("Share Photo")
+//                            .fontWeight(.bold)
+//                        Image(systemName: "tray.and.arrow.up.fill")
+//                    }
+//                    .padding()
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .stroke(Color.blue, lineWidth: 3)
+//                    )
+//                }
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -45,11 +45,11 @@ struct FillImageView: View {
     }
     
     //issues come from sharing a photo within the modal sheet.  Maybe I can call dismiss on this sheet, and set a flag in the parent view that itself calls the sharePhoto method.  
-    func sharePhoto(Info: String){
-        let infoU = Info
-        let av = UIActivityViewController(activityItems: [infoU], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-    }
+//    func sharePhoto(Info: String){
+//        let infoU = Info
+//        let av = UIActivityViewController(activityItems: [infoU], applicationActivities: nil)
+//        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+//    }
 }
 
 struct FillImageView_Previews: PreviewProvider {
