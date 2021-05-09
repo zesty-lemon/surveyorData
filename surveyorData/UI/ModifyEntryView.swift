@@ -98,7 +98,8 @@ struct ModifyEntryView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
+            .fullScreenCover(isPresented: $showImagePicker,
+                                     onDismiss: loadImage) {ImagePicker(image: self.$inputImage).edgesIgnoringSafeArea(.all)}
             .navigationBarTitle(Text("Edit Sample Data"), displayMode: .inline)
             .navigationBarItems(leading:
                                     Button(action: {

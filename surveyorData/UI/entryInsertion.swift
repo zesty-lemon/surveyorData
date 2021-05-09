@@ -101,7 +101,9 @@ struct entryInsertion: View {
                         }
                     }
                 }
-                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
+                .fullScreenCover(isPresented: $showImagePicker,
+                                         onDismiss: loadImage) {ImagePicker(image: self.$inputImage).edgesIgnoringSafeArea(.all)}
+//                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) { ImagePicker(image: self.$inputImage) }
             }
             .navigationBarTitle(Text("Add a sample"), displayMode: .inline)
             .navigationBarItems(leading:
