@@ -46,7 +46,7 @@ struct ModifyEntryView: View {
                         Button(action: {
                             tempLat = coordinate.latitude
                             tempLong = coordinate.longitude
-                            locationButtonText = "Tap to Replace"
+                            locationButtonText = "Tap to Update"
                         }){
                             HStack(alignment: .center){
                                 Text(locationButtonText)
@@ -77,7 +77,7 @@ struct ModifyEntryView: View {
                         } else {
                             Button(action: { self.showImagePicker.toggle() }) {
                                 HStack(alignment: .center){
-                                    Text("Select Photo")
+                                    Text("Replace Photo")
                                         .fontWeight(.bold)
                                         .foregroundColor(.blue)
                                     Image(systemName: "camera.fill")

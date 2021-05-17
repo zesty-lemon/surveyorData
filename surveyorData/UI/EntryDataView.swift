@@ -44,7 +44,7 @@ struct EntryDataView: View {
                     .padding(.bottom, -180)
             }
             VStack(alignment: .leading) {
-                Text("Sample Data")
+                Text("Sample \(entry.humanReadableID)")
                     .font(.title)
                     .foregroundColor(Color.black)
                 HStack {
@@ -75,7 +75,7 @@ struct EntryDataView: View {
                 Divider()
             }
         }
-        .navigationTitle("Sample Data")
+        .navigationTitle("Sample \(entry.humanReadableID)")
         .navigationBarItems(trailing: Button(action: {
             self.modalView = .edit
             self.isSheetShown = true

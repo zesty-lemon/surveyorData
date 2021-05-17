@@ -42,17 +42,11 @@ struct surveyIndexView: View {
                         ){
                             HStack {
                                 Text(eachSurvey.surveyTitle)
-                                
                             }
                         }
                     }
                     .onDelete(perform: deleteSurvey(at:))
-//                    .alert(isPresented: $alertIsPresented,
-//                           content: {
-//                            Alert(title: Text("Delete Survey?"), message: Text("Are you sure you want to delete this survey and all its data? This cannot be undone"), dismissButton: .default(Text("Delete")))
-//                           })
                 }
-                
                 .listStyle(PlainListStyle())
                 .navigationBarTitle("My Surveys",displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
@@ -68,9 +62,7 @@ struct surveyIndexView: View {
             }
         }
     }
-    func callDelete(at offsets: IndexSet){
-        
-    }
+
     //need to add code to delete the csv for this survey as well
     func deleteSurvey(at offsets: IndexSet) {
         //self.alertIsPresented = true

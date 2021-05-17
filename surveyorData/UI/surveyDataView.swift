@@ -7,6 +7,7 @@ import UIKit //used for the share sheet
 import SwiftUI
 import Foundation
 import MapKit
+
 enum SurveyModalView {
     case insertion
     case map
@@ -63,6 +64,9 @@ struct surveyDataView: View {
                 VStack{
                     //need a hstack of buttons here with actions like export etc
                     VStack{
+                        Text("Samples in \(parentSurvey.surveyTitle)")
+                            .font(.title)
+                            .padding()
                         HStack{
                             Button(action: {
                                 shareCSV(toExport: exportData())
@@ -90,7 +94,7 @@ struct surveyDataView: View {
                                         Text("Map")
                                             .fontWeight(.bold)
                                             .foregroundColor(.green)
-                                        Image(systemName: "map")
+                                        Image(systemName: "map.fill")
                                     }
                                     .padding()
                                     .overlay(
@@ -102,9 +106,8 @@ struct surveyDataView: View {
                         }
                         Divider()
                     }
-                    .padding()
-                    Text("Samples in \(parentSurvey.surveyTitle)")
-                        .font(.title)
+                   // .padding()
+                    
                     //Show all samples in a given survey
                     List{
                         ForEach(entries, id: \.id) { entry in

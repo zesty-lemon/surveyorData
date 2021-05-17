@@ -4,15 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;To export photos from your samples&quot;</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
-		</dict>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -35,6 +26,8 @@
 	<string>&quot;We need to add photos to your surveys&quot;</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>&quot;We use it to store locations of samples in your survey&quot;</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;To export photos from your samples&quot;</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

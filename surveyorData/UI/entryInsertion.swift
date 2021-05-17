@@ -50,7 +50,7 @@ struct entryInsertion: View {
                             Button(action: {
                                 entryLat = coordinate.latitude
                                 entryLong = coordinate.longitude
-                                buttonTitle = "Tap to Replace"
+                                buttonTitle = "Tap to Update"
                             }){
                                 HStack(alignment: .center){
                                     Text(buttonTitle)
@@ -65,7 +65,7 @@ struct entryInsertion: View {
                                 )
                                 .frame(maxWidth: .infinity, alignment: .center)
                             }
-                        }
+                        }.listRowBackground(Color.clear)
                     }
                     if parentSurvey.containsPhoto == true{
                         Section(header: Text("Photo", comment: "Section Header - Picture")) {
@@ -122,6 +122,7 @@ struct entryInsertion: View {
         }
         .onAppear{
             setupEntry()
+            //UITableView.appearance().backgroundColor = .blue
         }
     }
     func setupEntry(){

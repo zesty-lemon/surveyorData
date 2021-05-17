@@ -23,5 +23,4 @@ extension Entry {
     @NSManaged public var long: Double
     @NSManaged public var survey: Survey
     @NSManaged public var humanReadableID: Int16
-    
 }

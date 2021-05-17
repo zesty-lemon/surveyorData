@@ -11,6 +11,7 @@ struct FillImageView: View {
     var image: Image
     @Environment(\.presentationMode) var presentationMode
     @State var items: [Any] = []
+    @State var scale: CGFloat = 1.0
     var body: some View {
         //change this to be dynamically, which is basically impossible
         NavigationView{
@@ -31,8 +32,14 @@ struct FillImageView: View {
 //                }
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
                     .frame(width: 350)
+                    .scaleEffect(scale)
+                    .aspectRatio(contentMode: .fit)
+                    .gesture(MagnificationGesture()
+                               .onChanged { value in
+                                   self.scale = value.magnitude
+                               }
+                           )
             }
             .navigationBarTitle(Text("Photo Preview"), displayMode: .inline)
             .navigationBarItems(trailing:
