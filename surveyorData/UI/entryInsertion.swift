@@ -5,7 +5,8 @@
 //
 import SwiftUI
 import CoreData
-
+import CoreLocation
+// Adding a new entry to a survey
 struct entryInsertion: View {
     //@ObservedObject var parentSurvey = Survey()
     @Binding var parentSurvey: Survey

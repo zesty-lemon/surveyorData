@@ -30,18 +30,22 @@ struct FillImageView: View {
 //                            .stroke(Color.blue, lineWidth: 3)
 //                    )
 //                }
+                //works but aspect ratio is off
+//                image
+//                    .resizable()
+//                    .frame(width: 350)
+//                    .scaleEffect(scale)
+//                    .aspectRatio(contentMode: .fit)
+//                    .gesture(MagnificationGesture()
+//                               .onChanged { value in
+//                                   self.scale = value.magnitude
+//                               }
+//                           )
                 image
-                    .resizable()
-                    .frame(width: 350)
-                    .scaleEffect(scale)
-                    .aspectRatio(contentMode: .fit)
-                    .gesture(MagnificationGesture()
-                               .onChanged { value in
-                                   self.scale = value.magnitude
-                               }
-                           )
+                            .resizable()
+                            .scaledToFit()
             }
-            .navigationBarTitle(Text("Photo Preview"), displayMode: .inline)
+            .navigationBarTitle(Text("Preview"), displayMode: .inline)
             .navigationBarItems(trailing:
                                     Button(action: {
                                         presentationMode.wrappedValue.dismiss()

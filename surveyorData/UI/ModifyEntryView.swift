@@ -6,7 +6,8 @@
 //
 import SwiftUI
 import CoreData
-
+import CoreLocation
+// Modifying an existing entry
 struct ModifyEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode

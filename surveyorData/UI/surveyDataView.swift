@@ -7,7 +7,8 @@ import UIKit //used for the share sheet
 import SwiftUI
 import Foundation
 import MapKit
-
+// This page shows all the entries in a survey
+// It also handles export operations
 enum SurveyModalView {
     case insertion
     case map

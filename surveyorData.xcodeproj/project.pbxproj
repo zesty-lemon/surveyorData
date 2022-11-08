@@ -31,6 +31,7 @@
 		08BBD7F7261E3D90000BCEB7 /* EntryParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */; };
 		08C28B0A261122D700C6AA3B /* EntryDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C28B09261122D700C6AA3B /* EntryDataView.swift */; };
 		08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */; };
+		08D921E8279DC826000CCB3B /* ApplicationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D921E7279DC826000CCB3B /* ApplicationSettingsView.swift */; };
 		08DAF9722625E00100142671 /* ModifyParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DAF9712625E00100142671 /* ModifyParametersView.swift */; };
 		08EB8F6B2624BC6200A9ED1C /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F6A2624BC6200A9ED1C /* CircleImageView.swift */; };
 		08EB8F872624CA8200A9ED1C /* EntryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB8F862624CA8200A9ED1C /* EntryRowView.swift */; };
@@ -91,6 +92,7 @@
 		08BBD7F6261E3D90000BCEB7 /* EntryParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryParameterView.swift; sourceTree = "<group>"; };
 		08C28B09261122D700C6AA3B /* EntryDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDataView.swift; sourceTree = "<group>"; };
 		08D8D4B72609342800E17B37 /* ExtraFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFieldsView.swift; sourceTree = "<group>"; };
+		08D921E7279DC826000CCB3B /* ApplicationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSettingsView.swift; sourceTree = "<group>"; };
 		08DAF9712625E00100142671 /* ModifyParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyParametersView.swift; sourceTree = "<group>"; };
 		08EB8F6A2624BC6200A9ED1C /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		08EB8F862624CA8200A9ED1C /* EntryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRowView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		080D6FDB2602D6D700B9A32D /* Constant */ = {
 			isa = PBXGroup;
 			children = (
+				0880B7FA26015FD8008ED3A5 /* Assets.xcassets */,
 				08F4DA5E2602D811006D4509 /* Constants.swift */,
 				08590469263F43BA00B6AE30 /* ConstantFunctions.swift */,
 			);
@@ -141,6 +144,13 @@
 				08300EBE262B67C800FCE57A /* ImagePicker.swift */,
 			);
 			path = "Image Handling";
+			sourceTree = "<group>";
+		};
+		083D441727DD3CEF00A41C3A /* Data Processing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Processing";
 			sourceTree = "<group>";
 		};
 		0877FB1A263C687900A8F77C /* Libraries */ = {
@@ -176,6 +186,7 @@
 		0880B7F526015FD7008ED3A5 /* surveyorData */ = {
 			isa = PBXGroup;
 			children = (
+				083D441727DD3CEF00A41C3A /* Data Processing */,
 				0877FB1A263C687900A8F77C /* Libraries */,
 				08300EB2262B679400FCE57A /* Image Handling */,
 				08B41CB6262884530040014F /* Managers */,
@@ -183,7 +194,6 @@
 				0880B8352601646F008ED3A5 /* Database */,
 				0880B7F626015FD7008ED3A5 /* surveyorDataApp.swift */,
 				0880B7F826015FD7008ED3A5 /* ContentView.swift */,
-				0880B7FA26015FD8008ED3A5 /* Assets.xcassets */,
 				0880B7FF26015FD8008ED3A5 /* Persistence.swift */,
 				0880B80426015FD8008ED3A5 /* Info.plist */,
 				0880B80126015FD8008ED3A5 /* surveyorData.xcdatamodeld */,
@@ -234,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				0880B849260164DA008ED3A5 /* surveyIndexView.swift */,
+				08D921E7279DC826000CCB3B /* ApplicationSettingsView.swift */,
 				0880B853260164FF008ED3A5 /* surveyDataView.swift */,
 				08C28B09261122D700C6AA3B /* EntryDataView.swift */,
 				0880B841260164B9008ED3A5 /* surveyCreation.swift */,
@@ -418,6 +429,7 @@
 				0880B83D2601646F008ED3A5 /* Entry+CoreDataProperties.swift in Sources */,
 				08EB8F6B2624BC6200A9ED1C /* CircleImageView.swift in Sources */,
 				0880B83B2601646F008ED3A5 /* Survey+CoreDataProperties.swift in Sources */,
+				08D921E8279DC826000CCB3B /* ApplicationSettingsView.swift in Sources */,
 				08F4DA5F2602D811006D4509 /* Constants.swift in Sources */,
 				0869D9B4262104C200D0ECDB /* LocationSaveView.swift in Sources */,
 				08D8D4B82609342800E17B37 /* ExtraFieldsView.swift in Sources */,

@@ -8,13 +8,14 @@
 import SwiftUI
 import CoreData
 
-// see table of all different surveys
-//managedContext is where data is being stored
+//  see table of all different surveys
+//  managedContext is where data is being stored
 
 struct surveyIndexView: View {
     @Environment(\.managedObjectContext) var moc
     @State var showingDetail = false
     @State private var alertIsPresented = false
+    @State var showingSettings = false
     @FetchRequest(entity: Survey.entity(), sortDescriptors: [], predicate:NSPredicate(format:"type == %@","Survey")) var surveys: FetchedResults<Survey>
     var body: some View {
         NavigationView{
@@ -59,7 +60,20 @@ struct surveyIndexView: View {
                 .sheet(isPresented: $showingDetail) {
                     surveyCreation()
                 }
+                .navigationBarItems(leading: Button(action: {
+                    self.showingSettings = true
+                }, label: {
+                    Image(systemName: "gear")
+                        //.imageScale(.large)
+                        .font(.system(size: CGFloat(Constants.iconSize)))
+                }))
             }
+            NavigationLink(
+                        destination: ApplicationSettingsView(),
+                        isActive: $showingSettings
+                    ) {
+                        EmptyView()
+                    }
         }
     }
 

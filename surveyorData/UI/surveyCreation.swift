@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import Foundation
+import MapKit
 
 //insert a survey
 //field stores an ID and the fieldname
@@ -85,7 +86,9 @@ struct surveyCreation: View {
                                         })
         }
     }
-    
+    //todo add moveat
+    //maybe I could store a "fieldposition" var in the survey object.  On move adjusts that
+    //and the filter sorts on that aspect. 
     func removeField(at offsets: IndexSet) {
         print("removing")
         myFields.addedFields.remove(atOffsets: offsets)
@@ -106,7 +109,7 @@ struct surveyCreation: View {
                 }
             }
         }
-        //write survey init methods to stop weird erroers
+        //write survey init methods to stop weird errors
         NewSurvey.entryHeaders.append(contentsOf: tempFieldValues)
         NewSurvey.containsLocation = usesGPS
         NewSurvey.containsPhoto = usesPhoto
